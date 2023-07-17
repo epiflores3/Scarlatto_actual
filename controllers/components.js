@@ -1,4 +1,4 @@
-const SERVER_URL = 'http://localhost/scarlatto-gitactual/api/';
+const SERVER_URL = 'http://localhost/scarlatto_actual/api/';
 
 /*Confirma acciones y procede a realizarlas*/
 function confirmAction(message) {
