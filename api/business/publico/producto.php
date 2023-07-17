@@ -42,16 +42,16 @@ if (isset($_GET['action'])) {
             }
             break;
 
-        case 'readProductosMasVendidos':
-            if ($result['dataset'] = $producto->readProductosMasVendidos()) {
-                $result['status'] = 1;
-                $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
-            } elseif (Database::getException()) {
-                $result['exception'] = Database::getException();
-            } else {
-                $result['exception'] = 'No hay datos registrados';
-            }
-            break;
+        // case 'readProductosMasVendidos':
+        //     if ($result['dataset'] = $producto->readProductosMasVendidos()) {
+        //         $result['status'] = 1;
+        //         $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+        //     } elseif (Database::getException()) {
+        //         $result['exception'] = Database::getException();
+        //     } else {
+        //         $result['exception'] = 'No hay datos registrados';
+        //     }
+        //     break;
 
              /****************************************************/
             /*Leer un solo registro */

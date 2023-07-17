@@ -126,7 +126,8 @@ class DetalleProductoQueries
          $sql = 'SELECT nombre_producto, ROUND((COUNT(id_producto) * 100.0 / (SELECT COUNT(id_detalle_producto) FROM detalle_producto)), 2) porcentaje
          FROM detalle_producto
          INNER JOIN producto USING(id_producto)
-         GROUP BY nombre_producto ORDER BY porcentaje DESC';
+         GROUP BY nombre_producto ORDER BY porcentaje DESC
+         limit 6';
          return Database::getRows($sql);
      }
 

@@ -24,7 +24,7 @@ async function graficoPastelCategorias() {
             porcentaje.push(row.porcentaje);
         });
         // Llamada a la función que genera y muestra un gráfico de pastel. Se encuentra en el archivo components.js
-        pieGraph('chart2', marcas, porcentaje, 'Porcentaje de las marcas mas vendidas');
+        pieGraph('chart2', marcas, porcentaje, 'Porcentaje de productos por marca');
     } else {
         document.getElementById('chart2').remove();
         console.log(JSON.exception);

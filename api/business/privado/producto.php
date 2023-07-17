@@ -49,7 +49,7 @@ if (isset($_GET['action'])) {
             case 'readOne':
                 if (!$producto->setId($_POST['id'])) {
                     $result['exception'] = 'Producto incorrecto';
-                } elseif ($result['dataset'] = $producto->readOne()) {
+                } elseif ($result['dataset'] = $producto->readOneProductosPrivados()) {
                     $result['status'] = 1;
                 } elseif (Database::getException()) {
                     $result['exception'] = Database::getException();
@@ -117,7 +117,7 @@ if (isset($_GET['action'])) {
                         if (!$producto->setId($_POST['id'])) {
                             $result['exception'] = 'Id del producto incorrecto';
 
-                        } elseif (!$data = $producto->readOne()) {
+                        } elseif (!$data = $producto->readOneProductosPrivados()) {
                             $result['exception'] = 'Producto inexistente';
 
                         } elseif (!$producto->setNombre($_POST['nombrep'])) {
@@ -169,7 +169,7 @@ if (isset($_GET['action'])) {
                     case 'delete':
                         if (!$producto->setId($_POST['id_producto'])) {
                             $result['exception'] = 'Producto incorrecto';
-                        } elseif (!$data = $producto->readOne()) {
+                        } elseif (!$data = $producto->readOneProductosPrivados()) {
                             $result['exception'] = 'Producto inexistente';
                         } elseif ($producto->deleteRow()) {
                             $result['status'] = 1;

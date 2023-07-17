@@ -24,7 +24,7 @@ async function graficoPastelEstadoPedido() {
             porcentaje.push(row.porcentaje);
         });
         // Llamada a la función que genera y muestra un gráfico de pastel. Se encuentra en el archivo components.js
-        pieGraph('chart1', estado, porcentaje, 'Porcentaje de los estados de los pedidos');
+        pieGraph('chart1', estado, porcentaje, 'Porcentaje de pedidos por estado');
     } else {
         document.getElementById('chart1').remove();
         console.log(JSON.exception);

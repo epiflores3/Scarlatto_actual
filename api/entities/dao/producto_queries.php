@@ -25,6 +25,17 @@ class ProductoQueries
     }
 
     
+    public function readOneProductosPrivados()
+    {
+        $sql = 'SELECT id_producto, nombre_producto, imagen_principal, descripcion_producto, estado_producto, descuento_producto, id_usuario, id_categoria_producto
+        FROM producto
+        INNER JOIN usuario USING(id_usuario)
+        INNER JOIN categoria_producto USING(id_categoria_producto)
+        WHERE id_producto=?';
+         $params = array($this->id);
+        return Database::getRow($sql, $params);
+    }
+
 
     public function readAllValoracion()
     {
@@ -38,18 +49,18 @@ class ProductoQueries
         return Database::getRows($sql, $params);
     }
 
-//   /**CARGAR TODOS LOS PRODUCTOS */
-    // public function readProductos()
-    // {
-    //     $sql = 'SELECT id_producto, imagen_principal, nombre_producto, descripcion_producto, precio_producto, nombre_categoria, nombre_material, talla , marca
-    //     FROM detalle_producto
-    //     INNER JOIN producto USING(id_producto)
-    //     INNER JOIN categoria_producto USING(id_categoria_producto)
-    //     INNER JOIN material USING(id_material)
-    //     INNER JOIN marca USING(id_marca)
-    //     INNER JOIN talla USING(id_talla)';
-    //     return Database::getRows($sql);
-    // }
+  /**CARGAR TODOS LOS PRODUCTOS */
+    public function readProductos()
+    {
+        $sql = 'SELECT id_producto, imagen_principal, nombre_producto, descripcion_producto, nombre_categoria, nombre_material, talla , marca
+        FROM detalle_producto
+        INNER JOIN producto USING(id_producto)
+        INNER JOIN categoria_producto USING(id_categoria_producto)
+        INNER JOIN material USING(id_material)
+        INNER JOIN marca USING(id_marca)
+        INNER JOIN talla USING(id_talla)';
+        return Database::getRows($sql);
+    }
 
 //     /*CARGAR PRODUCTOS MAS PEDIDOS*/
 

@@ -23,7 +23,7 @@ async function graficoDoughnutProducto() {
             porcentajes.push(row.porcentaje);
         });
         // Llamada a la función que genera y muestra un gráfico de pastel. Se encuentra en el archivo components.js
-        doughnutGraph('chart2', productos, porcentajes, 'Porcentaje de productos más vendidos');
+        doughnutGraph('chart2', productos, porcentajes, 'Top 6 de productos con más detalles');
     } else {
         document.getElementById('chart2').remove();
         console.log(JSON.exception);
