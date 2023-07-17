@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <script src="https://kit.fontawesome.com/22083da215.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../resources/css/estiloprivado.css" />
+    <title>Dasboard</title>
+</head>
+
+<body>
+    <div class="row">
+        <div class="casa col-2">
+            <!--Navbar principal-->
+            <nav></nav>
+        </div>
+        <div class="col-10">
+            <!--Menu Header-->
+            <div class="row">
+                <header></header>
+            </div>
+            <!--Main principal-->
+            <div class="row">
+                <main class="container">
+                    <!--Inicio slider-->
+                    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0"
+                                class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                                aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                                aria-label="Slide 3"></button>
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="../../resources/img/sliderDasboardprivado/imgrosajoyas.png"
+                                    class="d-block w-100" alt="..." height="224" width="1107">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5>First slide label</h5>
+                                    <p>Some representative placeholder content for the first slide.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="../../resources/img/sliderDasboardprivado/slider3off.png"
+                                    class="d-block w-100" alt="..." height="224" width="1107">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5>Second slide label</h5>
+                                    <p>Some representative placeholder content for the second slide.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="../../resources/img/sliderDasboardprivado/sliderof2.png" class="d-block w-100"
+                                    alt="..." height="224" width="1107">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5>Third slide label</h5>
+                                    <p>Some representative placeholder content for the third slide.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                    <!--Fin slider-->
+
+                    <!--Botones graficas incio-->
+                    <div class="row bot">
+
+                        <div class="col col-lg-4 col-sm-12">
+                        
+                            <button class="btn  me-md-2" type="button ">
+                                <a href="graficosdefechaspedidos.html"><img class="btnbuscados" src="../../resources/img/botonesnav/productos+buscados.png"
+                                    alt=""></a>
+                            </button>
+                        </div>
+
+
+                        <div class="col col-lg-4 col-sm-12">
+                            
+                            <button class="btn me-md-2" type="button">
+                                <a href="graficameteriales.html"><img class="btnxcategorias" src="../../resources/img/botonesnav/productosxcategoria.png"
+                                    alt=""></a>
+                            </button>
+                        </div>
+
+                        
+
+                        <div class="col col-lg-4 col-sm-12">
+                            <button class="btn me-md-2" type="button">
+                                <a href="graficamarcas.html"><img class="btnmarcas" src="../../resources/img/botonesnav/productos+bendidos.png"
+                                    alt=""></a>
+                            </button>
+                        </div>
+
+                    </div>
+
+
+                    <!--Empieza la grafica cantidad de productos por material y estados de los pedidos -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col 6 m6">
+                                    <canvas id="chart1"></canvas>
+                                </div>
+
+                                <div class="col 6 m6">
+                                    <canvas id="chart2"></canvas>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </div>
+
+
+                        <!-- <div class="col-4">
+
+                            <table class="table ">
+                                <div class="col 12">
+                                    <td>
+                                        <img height="50px" width="50px" src="../../resources/img/fotosextra/usuario.png" alt="">
+                                    </td>
+                                    <td>
+                                        <div class="rounded float-star">
+                                            <label>Activo</label>
+                                            <h6>Josue Guinea</h6>
+                                        </div>
+                                    </td>
+
+                                </div>
+
+                            </table>
+
+                            <table class="table ">
+                                <div class="col 12">
+                                    <td>
+                                        <img height="50px" width="50px" src="../../resources/img/fotosextra/usuario.png" alt="">
+                                    </td>
+                                    <td>
+                                        <div class="rounded float-star">
+                                            <label>Activo</label>
+                                            <h6>Fátima Flores</h6>
+                                        </div>
+                                    </td>
+
+                                </div>
+
+                            </table>
+                            <table class="table ">
+                                <div class="col 12">
+                                    <td>
+                                        <img height="50px" width="50px" src="../../resources/img/fotosextra/usuario.png" alt="">
+                                    </td>
+                                    <td>
+                                        <div class="rounded float-star">
+                                            <label>Activo</label>
+                                            <h6>Max Benjamín</h6>
+                                        </div>
+                                    </td>
+                                  
+                                </div>
+
+                            </table>
+                            <table class="table ">
+                                <div class="col 12">
+                                    <td>
+                                        <img height="50px" width="50px" src="../../resources/img/fotosextra/usuario.png" alt="">
+                                    </td>
+                                    <td>
+                                        <div class="rounded float-star">
+                                            <label>Activo</label>
+                                            <h6>Fátima Fuentes</h6>
+                                        </div>
+                                    </td>
+                                  
+                                </div>
+
+                            </table>
+
+                        </div> -->
+
+
+
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <!--Footer-->
+        <div class="col-12 pt-5 pb-4">
+            <footer></footer>
+        </div>
+    </div> <!-- Importación de la librería para generar los gráficos en tiempo real. Para más información https://www.chartjs.org/ -->
+    <script src="../../resources/js/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="../../resources/js/sweetalert.min.js"></script>
+    <script src="../../controllers/privado/account.js"></script>
+    <script src="../../controllers/components.js"></script>
+    <!-- <script src="../../controllers/privado/graficamateriales.js"></script> -->
+      <script src="../../controllers/privado/graficadeestadospedidos.js"></script>
+    <script src="../../controllers/privado/graficadonaproducto.js"></script>
+    <script type="text/javascript" src="../../controllers/privado/plantilla.js"></script>
+</body>
+
+</html>

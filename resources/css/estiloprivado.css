@@ -1,0 +1,340 @@
+*{
+ padding: 0;
+ margin: 0;
+}
+
+
+/*Del menu*/
+ .row .casa{
+    background: #F5F5F5;
+ }
+
+
+/*Del menu*/
+.navigation-list{
+    list-style-type: none;
+    padding: 0px 3px;
+    margin-top: 10px;
+}
+
+/*Del menu*/
+.navigation-list-item{
+   
+    padding: 10px 18px 10px 18px;
+    border-radius: 50px;
+    margin: 15px 0px;
+
+}
+/*Del menu*/
+.navigation-list-item:hover{
+    background:#FBB8C4;
+    box-shadow: 0 0 0.5em rgb(255, 255, 255, 0.1);
+    cursor: pointer;
+}
+/*Del menu*/
+.navigation-list-item.active{
+    background:#f8c7d0;
+    box-shadow: 0 0 0.5em rgb(255, 255, 255, 0.1);
+    cursor: pointer;
+}
+
+/*Del menu*/
+.navigation-link{
+    color:rgba(0, 0, 0, 0.8);
+    letter-spacing: 0.5px;
+    font-weight: 400;
+    font-size: 11px;
+    text-decoration: none;
+}
+
+
+/*Del menu*/
+.navigation-link:hover .navigation-link{
+    color: rgb(255, 255, 255, 0.7);
+}
+/*Del menu*/
+.navigation-link.active .navigation-link{
+    color: rgb(255, 255, 255, 0.8);;
+}
+/*Del menu*/
+.navigation-link i{
+    font-size: 15px;
+}
+
+
+/*Del footer*/
+ .row .col-12bgf{
+    background: #ccc;   
+}
+
+/*Del footer*/
+ .row .col-12kfm{
+    border-bottom: solid #ccc;
+    background: #F0F0F0;
+}
+
+/*Del footer*/
+ .row .col-12 {
+    background: #F0F0F0;
+}
+
+/*Del footer col info*/
+ .row .col-12{
+    padding: 10px 30px 10px 30px;
+}
+
+/* De los Botones de las graficas dasboard tamaño img */
+ .row .btnbuscados{
+    width: 264px;
+    height: 188px;
+}
+
+/* De los Botones de las graficas dasboard tamaño img*/
+ .row .btnxcategorias{
+    width: 264px;
+    height: 188px;
+}
+
+/* De los Botones de las graficas dasboard tamaño img */
+ .row .btnvendidos{
+    width: 264px;
+    height: 188px;
+}
+
+/* De los Botones de las graficas dasboard tamaño img */
+.row .btnmarcas{
+    width: 264px;
+    height: 188px;
+}
+
+
+/* De los Botones de las graficas dasboard personalizado de botones*/
+ .row .btn{
+    border-radius: 100px;
+}
+
+/*Hover de los botones de los graficos*/
+ .row .btn:hover{
+    border-radius: 55px;
+    background: #F5F5F5;
+}
+
+/*mainp configurarle el padding*/
+.mainp{
+    padding: 10px 10px 10px 10px;
+}
+
+
+
+/*******************************LOGIN CAMBIOS CSS************************************/
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+/**/
+*{
+    font-family: 'Poppins', sans-serif;
+}
+/**/
+.wrapper{
+    background-color: #ececec;
+    padding: 0 20px 0 20px;
+}
+
+/**/
+.wrapper .main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+     
+}
+
+/**/
+.wrapper .main .inicio{
+    width: 900px;
+    height: 550px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 5px 5px 10px 1px rgba(0,0,0,0.2); 
+     
+}
+
+/**/
+ .side-image{
+    background-image: url("../../resources/img/fotosextra/brillianty-dragocennosti.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    border-radius: 10px 0 0 10px;
+}
+
+/**/
+.side-image .logo{
+    width: 35px;
+    position: absolute;
+    top: 35px;
+}
+
+/**/
+.side-image .text{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/**/
+.side-image .text p{
+    color: #fff;
+    font-size: 18px;
+}
+
+/**/
+i{
+    font-weight: 400;
+    font-size: 15px;
+}
+
+/**/
+.right{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/**/
+.right .input-box{
+    width: 330px;
+    box-sizing: border-box;
+}
+
+/**/
+.right .input-box header{
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+/**/
+.input-box .input-field{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 0 10px 0 10px;
+}
+
+/**/
+.input-field .input{
+    height: 45px;
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    outline: none;
+    margin-bottom: 20px;
+    color: #40414a;
+}
+
+/**/
+.input-box .input-field label{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    pointer-events: none;
+    transition: .5s;
+}
+
+/**/
+.input-field .input:focus ~ label {
+    top: -10px;
+    font-size: 13px;
+
+}
+
+/**/
+.input-field .input:valid ~ label {
+    top: -10px;
+    font-size: 13px;
+    color: #5d5076;
+
+}
+
+/**/
+.input-field .input:focus, .input-field .input:valid{
+    border-bottom: 1px solid #743ae1;
+}
+
+/**/
+.submit{
+    border: none;
+    outline: none;
+    height: 45px;
+    background: #ececec;
+    border-radius: 5px;
+    transition: .4s;
+}
+
+/**/
+.submit:hover{
+    background-color: rgb(37, 95, 156,0.9);
+    color: #fff;
+}
+
+/**/
+.signin{
+    text-align: center;
+    font-size: small;
+    margin-top: 25px;
+
+}
+
+/**/
+span a{
+    text-decoration: none;
+    font-weight: 700;
+    color: #000;
+
+}
+
+/**/
+span a:hover{
+    text-decoration: underline;
+    color: #000;
+}
+
+/**/
+@media only screen and (max-width: 768px){
+    /**/
+    .side-image{
+        border-radius: 10px 10px 0 0;
+    }
+    img{
+        width: 35px;
+        position: absolute;
+        top: 20px;
+        left: 47%;
+    }
+    /**/
+    .side-image .text{
+        position: absolute;
+        top: 70%;
+        text-align: center;
+    }
+    /**/
+    .side-image .text p,i{
+        font-size: 17px;
+    }
+    /**/
+    .main.inicio{
+        max-width: 420px;
+        width: 100%;
+    }
+
+}
+
+/*************INPUTS**************/
+/*#id{
+    display: none;
+  }

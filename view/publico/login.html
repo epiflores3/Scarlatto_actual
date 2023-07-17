@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <link rel="stylesheet" href="../../resources/css/estilopublico.css">
+    <title>Login | Scarlatto </title>
+</head>
+
+<body>
+
+    <div class="wrapper iniciando">
+        <div class="container main">
+            <form method="post" id="login">
+                <div class="row inicio">
+                    <div class="col-md-6 side-image">
+                        <!----------Imagen---------->
+                        <img class="logo" src="" alt="">
+                        <div class="text">
+                            <p></p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 right">
+                        <div class="input-box">
+                           <p>Iniciar Sesion</p>
+                            <div class="input-field">
+                                <input type="text" class="input"  id="email" name="correo" required autocomplete="off">
+                                <label for="email">Correo electrónico</label>
+                            </div>
+                            <div class="input-field">
+                                <input type="password" class="input" id="password" name="clave"  required> 
+                                <label for="password">Contraseña</label>
+                            </div>
+                            <div class="input-field">
+                                <input type="submit" class="submit" value="Iniciar sesión">
+                            </div>
+                            <div class="signin">
+                                <span> ¿No tienes una cuenta? <a href="registro_cuenta.html">Crear aquí</a></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+
+    <script src="../../controllers/publico/plantilla2.js"></script>
+    <script src="../../resources/js/sweetalert.min.js"></script>
+    <script src="../../controllers/components.js"></script>
+    <script src="../../controllers/publico/login.js"></script>
+
+
+</body>
+
+</html>

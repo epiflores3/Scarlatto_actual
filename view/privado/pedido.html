@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <script src="https://kit.fontawesome.com/22083da215.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../resources/css/estiloprivado.css" />
+    <link rel="stylesheet" href="../../resources/css/icons.css">
+    <title>Pedido</title>
+</head>
+
+<body>
+    <div class="row">
+        <div class="casa col-2">
+            <!--Navbar principal-->
+            <nav></nav>
+        </div>
+        <div class="col-10">
+            <!--Menu Header-->
+            <div class="row">
+                <header></header>
+            </div>
+            <!--Main principal-->
+            <div class="row">
+                <main class="container">
+                    <section>
+                        <div class="row">
+                            <div class="col-12ops">
+                                <div class="row">
+                                    <h1 class="text-center">Administrar pedidos</h1>
+                                    <br>
+                                    <div class="table-responsive">
+                                        <table class="table align-middle">
+                                            <thead>
+                                                <tr>
+                                                    <form method="post" id="search-form">
+                                                        <td>
+
+                                                            <div class="input-field">
+                                                        <td>
+                                                            <input id="search" type="text" name="search"
+                                                                class="form-control" placeholder="Buscar por "
+                                                                aria-label="Buscar" />
+                                                        </td>
+
+                                                        <!-- <aside id="popup" class="popup">
+                                                            <div class="contenedor--popup">
+                                                                <span>Escuchando...</span>
+                                                                <div class="contenedor--imagen">
+                                                                    <img src="../../resources/img/microfono.png" alt="Microfono">
+                                                                </div>
+                                                            </div>
+                                                        </aside> -->
+
+                                                        <td>
+                                                            <button type="submit" class="btn">
+                                                                <i class="fa-solid fa-magnifying-glass"></i>
+                                                            </button>
+                                                        </td>
+
+                                                        <!-- <td>
+                                                            <button class="microfono" id="microfono" type="submit">
+                                                                <img src="../../resources/img/botonmicrofono.png" alt="Microfono icono">
+                                                            </button>
+                                                        </td> -->
+                                                    </form>
+                                                    <td>
+
+
+                                                    </td>
+                                                    <td>
+                                                        <!-- Modal Trigger Agregar-->
+                                                        <!--<button type="button" class="btn" data-bs-toggle="modal"
+                                                            data-bs-target="#agregarpedido" onclick="openCreate()"><img
+                                                                height="25px" width="25px"
+                                                                src="../../resources/img/imgtablas/agregar.png"
+                                                                alt="agregar">
+                                                        </button>-->
+                                                    </td>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <table class="table">
+                                <thead>
+                                    <tr id="records"></tr>
+                                    <tr>
+                                        <th scope="col">Clientes</th>
+                                        <th scope="col">Fecha del pedido </th>
+                                        <th scope="col">Dirección</th>
+                                        <th scope="col">Estado</th>
+                                        <th scope="col">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody-rows"></tbody>
+                            </table>
+                        </div>
+
+                    </section>
+                </main>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal Para Agregar Pedido-->
+    <div class="modal fade" id="agregarpedido" tabindex="-1" aria-labelledby="agregarpedido" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-title"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" id="save-form" enctype="multipart/form-data">
+
+                        <input class="invisible" type="number" id="id" name="id"><br>
+
+                        <div class="mb-3">
+                            <label>Estado pedido</label>
+                            <select class="form-select" required aria-label="select example" id="estado" name="estado">
+                                <option value="">Seleccione una opcion</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="">Fecha</label><br>
+                            <input type="date" name="fecha" id="fecha" class="form-control" required><br>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="">Dirección</label><br>
+                            <input type="text" name="direccion" id="direccion" class="form-control" required><br>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="">Cliente</label><br>
+                            <select name="cliente" id="cliente"></select>
+                        </div>
+
+                        <div>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i>
+                                Guardar</button>
+                        </div>
+                    </form>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- Modal Para Detalle del pedido -->
+    <!-- <div class="modal fade" id="detallepedido" tabindex="-1" aria-labelledby="detallepedido" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detallepedido">Agregar detalle del pedido</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <main class="container">
+                        <section>
+                            <div class="row">
+                                <h1 class="text-center">Administrar detalles del pedido</h1>
+                                <br>
+                                <div class="table-responsive">
+                                    <table class="table align-middle">
+                                        <thead>
+                                            <tr>
+
+                                                <td>
+                                                    <select class="form-select" aria-label="Default select example">
+                                                        <option selected>Buscador: Buscar por</option>
+                                                        <option value="1">Nombre del producto</option>
+                                                        <option value="2">Precio</option>
+                                                        <option value="3">Cantidad</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn"><img height="20px" width="20px"
+                                                            src="../../resources/img/imgtablas/check.png" alt="check">
+                                                    </button>
+
+                                                </td>
+                                                <td>
+                                                    <div class="rounded float-end">
+                                                        <button type="button" class="btn" data-bs-toggle="modal"
+                                                            data-bs-target="#agregardetallepedido"><img height="20px"
+                                                                width="20px"
+                                                                src="../../resources/img/imgtablas/agregar.png"
+                                                                alt="check">
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                    </table>
+                                </div>
+                                <br>
+                            </div>
+
+                            <div class="row">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Nombre producto</th>
+                                            <th scope="col">Número de pedido </th>
+                                            <th scope="col">Cantidad</th>
+                                            <th scope="col">Precio</th>
+                                            <th scope="col">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">Pendiente de utopiah</th>
+                                            <td>40</td>
+                                            <td>1</td>
+                                            <td>50.00</td>
+                                            <th scope="col">
+
+                                                <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                                                    data-bs-target="#editardetallepedido"><img height="20px"
+                                                        width="20px" src="../../resources/img/imgtablas/update.png"
+                                                        alt="actualizar">
+                                                </button>
+                                                <button type="button" class="btn btn-danger"><img height="20px"
+                                                        width="20px" src="../../resources/img/imgtablas/delete.png"
+                                                        alt="eliminar">
+                                                </button>
+                                            </th>
+                                        </tr>
+                                        <br>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                    </main>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- Modal Para Actualizar el detalle del pedido-->
+    <!-- <div class="modal fade" id="editardetallepedido" tabindex="-1" aria-labelledby="editardetallepedido"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editardetallepedido">Actualizar detalle del pedido</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <label for="">Nombre del producto</label><br>
+                    <input type="text" class="labeltext"><br>
+                    <label for="">cantidad del producto</label><br>
+                    <input type="number" class="labeltext"><br>
+                    <label for="">Precio</label><br>
+                    <input type="text" class="labeltext"><br>
+                    <label for="">Estado del pedido</label><br>
+                    <input type="text" class="labeltext"><br>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- Modal  para agregar detalle al pedido -->
+    <!-- Modal Para Detalle del pedido -->
+
+
+    <div class="modal fade" id="detallepedido" tabindex="-1" aria-labelledby="detallepedido" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detallepedido">Agregar detalle del pedido</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <main class="container">
+                        <section>
+                            <div class="row">
+                                <h1 class="text-center">Administrar detalles del pedido</h1>
+                                <br>
+                                <div class="table-responsive">
+                                    <table class="table align-middle">
+                                        <thead>
+                                            <tr id="recordsDetalle"></tr>
+                                            <tr>
+
+                                                <td>
+                                                    <select class="form-select" aria-label="Default select example">
+                                                        <option selected>Buscador: Buscar por</option>
+                                                        <option value="1">Nombre del producto</option>
+                                                        <option value="2">Precio</option>
+                                                        <option value="3">Cantidad</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn"><img height="20px" width="20px"
+                                                            src="../../resources/img/imgtablas/check.png" alt="check">
+                                                    </button>
+
+                                                </td>
+                                                <td>
+                                                    <div class="rounded float-end">
+                                                        <!-- Modal Trigger Agregar-->
+                                                        <button type="button" class="btn" data-bs-toggle="modal"
+                                                            data-bs-target="#agregardetallepedido"><img height="20px"
+                                                                width="20px"
+                                                                src="../../resources/img/imgtablas/agregar.png"
+                                                                alt="check">
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                    </table>
+                                </div>
+                                <br>
+                            </div>
+
+                            <div class="row">
+
+                                <table class="table">
+                                    <thead>
+                                        <tr id="records"></tr>
+                                        <tr>
+                                            <th scope="col">Producto</th>
+                                            <th scope="col">Cantidad</th>
+                                            <th scope="col">Precio</th>
+                                            <th scope="col">Id pedido</th>
+                                            <th scope="col">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbody-rowsdt"></tbody>
+                                </table>
+                            </div>
+                        </section>
+                    </main>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <!--Footer-->
+        <div class="col-12 pt-5 pb-4">
+            <footer></footer>
+        </div>
+    </div>
+    <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+        </script>
+
+    <script type="text/javascript" src="../../controllers/privado/plantilla.js"></script>
+    <script src="../../resources/js/sweetalert.min.js"></script>
+    <script src="../../controllers/privado/account.js"></script>
+    <script src="../../controllers/components.js"></script>
+    <script src="../../controllers/privado/pedido.js"></script>
+</body>
+
+</html>
