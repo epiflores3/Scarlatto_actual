@@ -1,46 +1,54 @@
 <?php
-// Se incluye la clase con las plantillas para generar reportes.
+// Se manda a traer el archivo que actua como plantilla para los reportes
 require_once('../../helpers/report.php');
-// Se incluyen las clases para la transferencia y acceso a datos.
+//Se mandan a traer las clases donde se encuentran los gets y los sets que usaremos en el reporte
 require_once('../../entities/dto/producto.php');
 require_once('../../entities/dto/marca.php');
 
-// Se instancia la clase para crear el reporte.
+// Se crea un objeto de la clase reporte.
 $pdf = new Report;
-// Se inicia el reporte con el encabezado del documento.
+// Se coloca un titulo al documento.
 $pdf->startReport('Producto por marca');
-// Se instancia el módelo Categoría para obtener los datos.
+// Se crea un objeto de la clase marca ya que estos sera por lo que se filtrara.
 $marca = new Marca;
-// Se verifica si existen registros para mostrar, de lo contrario se imprime un mensaje.
+// Verifica si exiten registros a mostrar.
 if ($dataMarca = $marca->readAll()) {
-    // Se establece un color de relleno para los encabezados.
+     // Se pone un color al encabezado.
     $pdf->setFillColor(175);
-    // Se establece la fuente para los encabezados.
+       // Se pone una fuente.
     $pdf->setFont('Times', 'B', 11);
-    // Se imprimen las celdas con los encabezados.
-    // $pdf->cell(126, 10, 'Nombre', 1, 0, 'C', 1);
+     // Se rellenan las celdas del encabezado.
+
+    // Significado de los numeros de cell: 
+        // Primero es el ancho de la celda
+        // Segundo el alto de la celda
+        // Tercero El valor que tendra la celda: TEXTO
+        // Cuarto Indica si se dibujan los bordes alrededor de la celda: 0 Sin bordes, 1 Marco, o tambien L izquierda, T arriba, R derecha, B abajo
+        // Quinto indica donde puede ir la posición: 0 A la derecha, 1 Al comienzo de la siguiente línea, 2 Abajo
+        // Sexto indica el alineamiento del texto: L Alineación a la izquierda, C centro, R Alineación a la derecha
+        
+
     $pdf->cell(93, 10, 'Producto', 1, 0, 'C', 1);
     $pdf->cell(93, 10, 'Existencias:', 1, 1, 'C', 1);
 
-    // Se establece un color de relleno para mostrar el nombre de la categoría.
+     // Se estabelce un color para la celda que muestra por lo que se filtra.
     $pdf->setFillColor(225);
-    // Se establece la fuente para los datos de los productos.
+     // Se establece una fuente para las celdas que muestran resultados.
     $pdf->setFont('Times', '', 11);
 
-    // Se recorren los registros fila por fila.
+    // Recorre filas una por una.
     foreach ($dataMarca as $rowMarca) {
-        // Se imprime una celda con el nombre de la categoría.
+          // Se muestra la celda que tendra el dato por el que se filtra.
         $pdf->cell(0, 10, $pdf->encodeString('Marca: ' . $rowMarca['marca']), 1, 1, 'C', 1);
-        // Se instancia el módelo Producto para procesar los datos.
+       // Se crea un objeto de la clase producto ya que esto sera lo que se filtrara .
         $producto = new Producto;
-        // Se establece la marca para obtener sus productos, de lo contrario se imprime un mensaje de error.
+         // Se establece por el id que tiene que capturar.
         if ($producto->setNombre($rowMarca['id_marca'])) {
-            // Se verifica si existen registros para mostrar, de lo contrario se imprime un mensaje.
+            // Verifica si exiten registros a mostrar.
             if ($producto = $producto->ProductosPorMarca()) {
-                // Se recorren los registros fila por fila.
+                // Recorre filas una por una.
                 foreach ($producto as $rowProc) {
-                    // ($rowMaterial['estado_producto']) ? $estado = 'Activo' : $estado = 'Inactivo';
-                    // Se imprimen las celdas con los datos de los productos.
+                      // Se rellenan las celdas de las tallas deacuerdo a un producto en especifico.
                     $pdf->cell(93, 10, $pdf->encodeString($rowProc['nombre_producto']), 1, 0);
                     $pdf->cell(93, 10, $rowProc['suma'], 1, 1);
                  
@@ -55,5 +63,12 @@ if ($dataMarca = $marca->readAll()) {
 } else {
     $pdf->cell(0, 10, $pdf->encodeString('No hay producto por marca para mostrar'), 1, 1);
 }
-// Se llama implícitamente al método footer() y se envía el documento al navegador web.
+
+// Se pone el nombre del archivo cuando se descarga y envía el documento a un destino determinado.
+// Significado de las letras:
+// I: envía el archivo en línea al navegador. Se utiliza el visor de PDF si está disponible.
+// D: enviar al navegador y forzar la descarga de un archivo con el nombre dado por name.
+// F: guarde en un archivo local con el nombre dado por name(puede incluir una ruta).
+// S: devuelve el documento como una cadena.
+
 $pdf->output('I', 'Producto-Marca.pdf');
