@@ -2,12 +2,15 @@
 require_once('../../helpers/validator.php');
 require_once('../../entities/dao/estado_usuario_queries.php');
 
+//Clases que se utilizarán para poder manejar los datos de la entidad correspondiente
 class EstadoUs extends EstadoUsuarioQueries
 
 {
+    //Declarar los atributos de los campos que se encuentran en la tabla correspondiente
     protected $id = null;
     protected $estadous = null;
 
+    //Método para validar dependiendo del dato que se utiliza, asimismo asignarle los valores de los atributos
     public function setId($value)
     {
         if (Validator::validateNaturalNumber($value)) {
@@ -18,6 +21,7 @@ class EstadoUs extends EstadoUsuarioQueries
         }
     }
 
+    //Método para validar dependiendo del dato que se utiliza, asimismo asignarle los valores de los atributos
     public function setTipous($value)
     {
         if (Validator::validateAlphanumeric($value, 1, 50)) {
@@ -28,14 +32,15 @@ class EstadoUs extends EstadoUsuarioQueries
         }
     }
 
+    //Método para obtener los valores de los atributos correspondientes
     public function getId()
     {
         return $this->id;
     }
 
+    //Método para obtener los valores de los atributos correspondientes
     public function getTipous()
     {
         return $this->estadous;
     }
-
 }
