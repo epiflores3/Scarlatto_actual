@@ -223,7 +223,7 @@ class PedidoQueries
         return Database::getRows($sql);
     }
 
-    //Para grafico lineas
+    //Consulta para grafico lineal top 5 fechas con mas pedidos, se crean 2 variables de uso, feha inicio, y fecha final para que funcione
     public function cantidadPedidosFechas($fecha_inicial, $fecha_final)
     {
         $sql = 'SELECT count(id_pedido) as pedidos, fecha_pedido from pedido

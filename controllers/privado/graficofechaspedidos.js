@@ -2,34 +2,34 @@
 const PEDIDOS_API = 'business/privado/pedido.php';
 const SAVE_FORM = document.getElementById('save-form');
 
-// Método manejador de eventos para cuando el documento ha cargado.
+//Método que se ejecuta al cargar la página
 document.addEventListener('DOMContentLoaded', () => {
 
 
 });
 
 SAVE_FORM.addEventListener('submit', async (event) => {
-    // Se evita recargar la página web después de enviar el formulario.
+    // Evaita cargar la pagina despues de enviar el formulario
     event.preventDefault();
-    // Se verifica la acción a realizar.
+    // Verifica la acción que se hara
 
-    // Constante tipo objeto con los datos del formulario.
+    // Se declara una constante de tipo FORM.
     const FORM = new FormData(SAVE_FORM);
-    // Petición para guardar los datos del formulario.
+    // Pide guardar los datos del formulario
     const JSON = await dataFetch(PEDIDOS_API, 'cantidadDePedidosMasSolicitados', FORM);
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    // Se comprubea si se hizo la acción.
     if (JSON.status) {
-        // Se declaran los arreglos para guardar los datos a gráficar.
+        // Se declaran arreglos para guardar los datos.
         let fechas = [];
         let pedidos = [];
-        // Se recorre el conjunto de registros fila por fila a través del objeto row.
+        // Se recorren las filas una por una
         JSON.dataset.forEach(row => {
             // Se agregan los datos a los arreglos.
             fechas.push(row.fecha_pedido);
             pedidos.push(row.pedidos);
         });
         document.getElementById('grafico').innerHTML = '<canvas id="chart2"></canvas>';
-        // Llamada a la función que genera y muestra un gráfico de pastel. Se encuentra en el archivo components.js
+        // Llamada a la función que genera y muestra un gráfico 
         lineGraph('chart2', fechas, pedidos, 'Cantidad de pedidos', 'Top 5 de fechas con mas pedidos' );
         sweetAlert(1, JSON.message, true);
 

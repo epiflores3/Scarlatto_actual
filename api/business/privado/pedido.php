@@ -147,8 +147,8 @@ if (isset($_GET['action'])) {
                     }
                 break;
 
+                //Se manda a llamar el método que trae los datos de la base de datos se cconvierte en json para mandarlo a JS
                 case 'cantidadDePedidosMasSolicitados':
-
                     if ($result['dataset'] = $pedido->cantidadPedidosFechas($_POST['fecha_inicial'], $_POST['fecha_final'])) {
                         $result['status'] = 1;
                         $result['message'] = 'Top 5 encontrado correctamente';
