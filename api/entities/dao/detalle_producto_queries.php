@@ -1,11 +1,10 @@
 <?php
 require_once('../../helpers/database.php');
 
+//Clase para poder tener acceso a todos de la entidad requerida
 class DetalleProductoQueries
 {
-     /*
-    *   Métodos para realizar las operaciones de buscar(search) de detalle producto
-    */
+    //Método para realizar el mantenimiento buscar(search)
     public function searchRows($value)
     {
         $sql = 'SELECT id_detalle_producto, existencia, nombre_producto, nombre_material, talla, marca
@@ -19,6 +18,7 @@ class DetalleProductoQueries
         return Database::getRows($sql, $params);
     }
 
+    //Método para realizar el mantenimiento read(leer)
     public function readAll()
     {
         $sql = 'SELECT id_detalle_producto, existencia, nombre_producto, nombre_material, talla, marca
@@ -30,8 +30,9 @@ class DetalleProductoQueries
         return Database::getRows($sql);
     }
 
-    public function readOne(){
-        $sql='SELECT id_detalle_producto, existencia, id_producto, id_material, id_talla, id_marca
+    public function readOne()
+    {
+        $sql = 'SELECT id_detalle_producto, existencia, id_producto, id_material, id_talla, id_marca
         FROM detalle_producto
         INNER JOIN producto USING(id_producto)
         INNER JOIN material USING(id_material)
@@ -42,6 +43,7 @@ class DetalleProductoQueries
         return Database::getRow($sql, $params);
     }
 
+    //Método para realizar el mantenimiento crear(create)
     public function createRow()
     {
         $sql = 'INSERT INTO detalle_producto(existencia, id_producto, id_material, id_talla, id_marca)
@@ -50,6 +52,7 @@ class DetalleProductoQueries
         return Database::executeRow($sql, $params);
     }
 
+    //Método para realizar el mantenimiento actualizar(update)
     public function updateRow()
     {
         $sql = 'UPDATE detalle_producto
@@ -59,6 +62,7 @@ class DetalleProductoQueries
         return Database::executeRow($sql, $params);
     }
 
+    //Método para realizar el mantenimiento eliminar(delete)
     public function deleteRow()
     {
         $sql = 'DELETE FROM detalle_producto
@@ -92,20 +96,20 @@ class DetalleProductoQueries
         return Database::getRows($sql, $params);
     }
 
-     //Para hacer reporte general de producto por material
-     public function productoPorMaterial()
-     {
-         $sql = 'SELECT nombre_material, sum(existencia) suma
+    //Para hacer reporte general de producto por material
+    public function productoPorMaterial()
+    {
+        $sql = 'SELECT nombre_material, sum(existencia) suma
          FROM detalle_producto
          INNER JOIN material USING(id_material)
          WHERE id_producto = ?
          group by nombre_material
          ORDER BY nombre_material';
-         $params = array($this->producto);
-         return Database::getRows($sql, $params);
-     }
-    
-     //Para hacer reporte general de tallas por marca
+        $params = array($this->producto);
+        return Database::getRows($sql, $params);
+    }
+
+    //Para hacer reporte general de tallas por marca
     public function tallasPorMarca()
     {
         $sql = 'SELECT talla, sum(existencia) suma
@@ -118,18 +122,18 @@ class DetalleProductoQueries
         $params = array($this->marca);
         return Database::getRows($sql, $params);
     }
-    
 
-    
-     public function porcentajeProducto()
-     {
-         $sql = 'SELECT nombre_producto, ROUND((COUNT(id_producto) * 100.0 / (SELECT COUNT(id_detalle_producto) FROM detalle_producto)), 2) porcentaje
+
+
+    public function porcentajeProducto()
+    {
+        $sql = 'SELECT nombre_producto, ROUND((COUNT(id_producto) * 100.0 / (SELECT COUNT(id_detalle_producto) FROM detalle_producto)), 2) porcentaje
          FROM detalle_producto
          INNER JOIN producto USING(id_producto)
          GROUP BY nombre_producto ORDER BY porcentaje DESC
          limit 6';
-         return Database::getRows($sql);
-     }
+        return Database::getRows($sql);
+    }
 
     // Filtra todas las tallas que le pertenecen a un producto en específico
     public function productoTalla()
@@ -143,5 +147,4 @@ class DetalleProductoQueries
         $params = array($this->producto);
         return Database::getRows($sql, $params);
     }
-
 }

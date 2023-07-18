@@ -1,11 +1,10 @@
 <?php
 require_once('../../helpers/database.php');
 
+//Clase para poder tener acceso a todos de la entidad requerida
 class PedidoQueries
 {
-    /*
-    *   Métodos para realizar las operaciones de buscar(search) de pedido
-    */
+    //Método para realizar el mantenimiento buscar(search)
     public function searchRows($value)
     {
         $sql = 'SELECT id_pedido, estados_pedido, fecha_pedido, direccion_pedido, nombre_cliente
@@ -16,6 +15,7 @@ class PedidoQueries
         return Database::getRows($sql, $params);
     }
 
+    //Método para realizar el mantenimiento read(leer)
     public function readAll()
     {
         $sql = 'SELECT id_pedido, estados_pedido, fecha_pedido, direccion_pedido, nombre_cliente
@@ -24,22 +24,26 @@ class PedidoQueries
         return Database::getRows($sql);
     }
 
-    public function readOne(){
-        $sql='SELECT id_pedido, estados_pedido, fecha_pedido, direccion_pedido, nombre_cliente, id_cliente
+    public function readOne()
+    {
+        $sql = 'SELECT id_pedido, estados_pedido, fecha_pedido, direccion_pedido, nombre_cliente, id_cliente
         FROM pedido 
         INNER JOIN cliente USING(id_cliente)
         WHERE id_pedido=?';
         $params = array($this->id);
         return Database::getRow($sql, $params);
     }
-        
-    public function deleteRow(){
-        $sql='DELETE FROM pedido 
-              WHERE id_pedido = ?';
-        $params=array($this->id);
-        return Database:: executeRow($sql, $params);
-    } 
 
+    //Método para realizar el mantenimiento eliminar(delete)
+    public function deleteRow()
+    {
+        $sql = 'DELETE FROM pedido 
+              WHERE id_pedido = ?';
+        $params = array($this->id);
+        return Database::executeRow($sql, $params);
+    }
+
+    //Método para realizar el mantenimiento crear(create)
     public function createRow()
     {
         $sql = 'INSERT INTO pedido(estados_pedido, fecha_pedido, direccion_pedido, id_cliente)
@@ -48,20 +52,17 @@ class PedidoQueries
         return Database::executeRow($sql, $params);
     }
 
+    //Método para realizar el mantenimiento actualizar(update)
     public function updateRow()
     {
         $sql = 'UPDATE pedido
                 SET  fecha_pedido = ?, direccion_pedido = ?, id_cliente = ?, estados_pedido = ?  
                 WHERE id_pedido = ?';
-        $params = array($this->fecha_pedido, $this->direccion_pedido, $this->cliente , $this->estado_pedido , $this->id);
-    
+        $params = array($this->fecha_pedido, $this->direccion_pedido, $this->cliente, $this->estado_pedido, $this->id);
+
         return Database::executeRow($sql, $params);
     }
 
-
-     /*
-    *   Métodos para realizar las operaciones SCRUD (search, create, read, update, delete).
-    */
     // Método para verificar si existe un pedido en proceso para seguir comprando, de lo contrario se crea uno.
     public function startOrder()
     {
@@ -69,7 +70,7 @@ class PedidoQueries
                 FROM pedido
                 WHERE estados_pedido = 'Pendiente' AND id_cliente = ?";
         $params = array($_SESSION['id_cliente']);
-        
+
         if ($data = Database::getRow($sql, $params)) {
             $this->id = $data['id_pedido'];
             return true;
@@ -90,16 +91,12 @@ class PedidoQueries
     // Método para agregar un producto al carrito de compras.
     public function createDetail()
     {
-        // Se realiza una subconsulta para obtener el precio del producto.
         $sql = 'INSERT INTO detalle_pedido(id_detalle_producto, precio_producto,cantidad_producto, id_pedido)
                 VALUES(?, (SELECT precio_producto FROM detalle_producto WHERE id_detalle_producto = ?), ?, ?)';
         $params = array($this->id_detalle_producto, $this->id_detalle_producto, $this->cantidad, $this->id);
         return Database::executeRow($sql, $params);
     }
 
-
-
-    
     // Método para obtener los productos que se encuentran en el carrito de compras.
     public function readOrderDetail()
     {
@@ -115,23 +112,18 @@ class PedidoQueries
         return Database::getRows($sql, $params);
     }
 
-    // // Método para finalizar un pedido por parte del cliente.
+    //Método para finalizar un pedido por parte del cliente.
     public function finishOrder()
     {
-        // Se establece la zona horaria local para obtener la fecha del servidor.
         date_default_timezone_set('America/El_Salvador');
         $date = date('Y-m-d');
-
-        $this->estado_pedido = 'Finalizado' ;
-        
+        $this->estado_pedido = 'Finalizado';
         $sql = 'UPDATE pedido
                 SET estados_pedido = ?, fecha_pedido = ?
                 WHERE id_pedido = ?';
         $params = array($this->estado_pedido, $date, $_SESSION['id_pedido']);
         return Database::executeRow($sql, $params);
     }
-
-
 
     // Método para actualizar la cantidad de un producto agregado al carrito de compras.
     public function updateDetail()
@@ -152,34 +144,31 @@ class PedidoQueries
         return Database::executeRow($sql, $params);
     }
 
-
-
-    
-     // Método para cargar los pedidos de mi cliente
-     public function cargarHistorial()
-     {
-         $sql = 'SELECT id_pedido, estados_pedido, fecha_pedido, direccion_pedido
+    // Método para cargar los pedidos de mi cliente
+    public function cargarHistorial()
+    {
+        $sql = 'SELECT id_pedido, estados_pedido, fecha_pedido, direccion_pedido
          FROM pedido
          INNER JOIN cliente USING(id_cliente)
          where id_cliente = ?';
         $params = array($this->id);
         return Database::getRows($sql, $params);
-     }
+    }
 
-
-     public function readVerCompra()
-     {
-         $sql = 'SELECT id_pedido, nombre_producto, detalle_pedido.id_detalle_pedido, detalle_pedido.precio_producto, detalle_pedido.cantidad_producto, producto.descripcion_producto, producto.imagen_principal, pedido.estados_pedido 
+    // Método poder visualizar la compra ha realizar
+    public function readVerCompra()
+    {
+        $sql = 'SELECT id_pedido, nombre_producto, detalle_pedido.id_detalle_pedido, detalle_pedido.precio_producto, detalle_pedido.cantidad_producto, producto.descripcion_producto, producto.imagen_principal, pedido.estados_pedido 
          FROM pedido
          INNER JOIN detalle_pedido USING(id_pedido)
          INNER JOIN detalle_producto  USING(id_detalle_producto) 
          INNER JOIN producto USING(id_producto) 
          WHERE id_pedido = ?';
-         $params = array($this->id);
-         return Database::getRows($sql, $params);
-     }
+        $params = array($this->id);
+        return Database::getRows($sql, $params);
+    }
 
-      // Metodos para el detalle del pedido
+    // Metodos para el detalle del pedido
 
     public function readAllDetallePedido()
     {
@@ -192,6 +181,7 @@ class PedidoQueries
         return Database::getRows($sql, $params);
     }
 
+    // Método para cargar los pedidos de mi cliente
     public function deleteDetalle($estado)
     {
         $sql = 'DELETE detalle_pedido
@@ -233,5 +223,4 @@ class PedidoQueries
         $params = array($fecha_inicial, $fecha_final);
         return Database::getRows($sql, $params);
     }
-
 }

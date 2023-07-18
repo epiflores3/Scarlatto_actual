@@ -1,9 +1,10 @@
 <?php
 require_once('../../helpers/database.php');
 
+//Clase para poder tener acceso a todos de la entidad requerida
 class ProductoQueries
 {
-
+    //Método para realizar el mantenimiento buscar(search)
     public function searchRows($value)
     {
         $sql = 'SELECT id_producto, nombre_producto, imagen_principal, descripcion_producto, precio_producto, estado_producto, descuento_producto, correo_usuario, nombre_categoria
@@ -14,7 +15,8 @@ class ProductoQueries
         $params = array("%$value%", "%$value%", "%$value%");
         return Database::getRows($sql, $params);
     }
-    
+
+    //Método para realizar el mantenimiento read(leer)
     public function readAll()
     {
         $sql = 'SELECT id_producto, nombre_producto, imagen_principal, descripcion_producto, estado_producto, descuento_producto, nombre_usuario, nombre_categoria
@@ -24,7 +26,7 @@ class ProductoQueries
         return Database::getRows($sql);
     }
 
-    
+    //Método para poder leer los productos que se han adquiridos
     public function readOneProductosPrivados()
     {
         $sql = 'SELECT id_producto, nombre_producto, imagen_principal, descripcion_producto, estado_producto, descuento_producto, id_usuario, id_categoria_producto
@@ -32,11 +34,11 @@ class ProductoQueries
         INNER JOIN usuario USING(id_usuario)
         INNER JOIN categoria_producto USING(id_categoria_producto)
         WHERE id_producto=?';
-         $params = array($this->id);
+        $params = array($this->id);
         return Database::getRow($sql, $params);
     }
 
-
+    //Método para leer todas las valoraciones, es decir, el mantenimiento leer
     public function readAllValoracion()
     {
         $sql = 'SELECT id_valoracion, calificacion_producto, comentario_producto, fecha_comentario, estado_comentario
@@ -49,7 +51,7 @@ class ProductoQueries
         return Database::getRows($sql, $params);
     }
 
-  /**CARGAR TODOS LOS PRODUCTOS */
+    //Método para cargar todos los productos
     public function readProductos()
     {
         $sql = 'SELECT id_producto, imagen_principal, nombre_producto, descripcion_producto, nombre_categoria, nombre_material, talla , marca
@@ -62,31 +64,11 @@ class ProductoQueries
         return Database::getRows($sql);
     }
 
-//     /*CARGAR PRODUCTOS MAS PEDIDOS*/
 
-    // public function readProductosMasVendidos()
-    // {
-    //     $sql = 'SELECT nombre_producto, precio_producto, nombre_categoria, nombre_material, talla, imagen_principal
-    //     from (
-    //         select d.id_producto, d.nombre_producto,d.imagen_principal,o.precio_producto, n.nombre_categoria, h.nombre_material, v.talla,
-    //         count (*) as cantidad_producto,
-    //         rank() over (order by count(*) desc) as rango
-    //         from detalle_pedido o
-    //         inner join detalle_producto u on u.id_detalle_producto = o.id_detalle_producto
-    //         inner join talla v on v.id_talla = u.id_talla
-    //         inner join material h on h.id_material = u.id_material
-    //         inner join producto d on d.id_producto = u.id_producto
-    //         inner join categoria_producto n on n.id_categoria_producto = d.id_categoria_producto
-    //         group by d.id_producto, d.nombre_producto,d.imagen_principal, o.precio_producto, n.nombre_categoria, h.nombre_material, v.talla
-    //     )sub
-    //     order by rango asc, id_producto asc
-    //     limit 4';
-    //     return Database::getRows($sql);
-    // }
-
+    //Método para realizar el mantenimiento eliminar(delete)
     public function deleteRowValo($estado)
     {
-        ($estado) ? $estado=0 : $estado=1;
+        ($estado) ? $estado = 0 : $estado = 1;
         $sql = 'UPDATE valoracion
         SET estado_comentario = ?
         WHERE id_valoracion = ?';
@@ -94,6 +76,7 @@ class ProductoQueries
         return Database::executeRow($sql, $params);
     }
 
+    //Método para leer una valoración
     public function readOneValo()
     {
         $sql = 'SELECT id_valoracion, calificacion_producto, comentario_producto, fecha_comentario, estado_comentario, id_detalle_pedido
@@ -103,8 +86,7 @@ class ProductoQueries
         return Database::getRow($sql, $params);
     }
 
-//      /****************************************************/
-//     /* Leer un solo registro*/
+    //Método para leer un producto
     public function readOne()
     {
         $sql = 'SELECT id_producto, imagen_principal, nombre_producto, descripcion_producto, descuento_producto, nombre_categoria, nombre_material, talla , marca
@@ -118,9 +100,8 @@ class ProductoQueries
         $params = array($this->id);
         return Database::getRow($sql, $params);
     }
-     /****************************************************/
 
-
+    //Método para realizar el mantenimiento crear(create)
     public function createRow()
     {
         $sql = 'INSERT INTO producto(nombre_producto, imagen_principal, descripcion_producto, estado_producto, descuento_producto, id_usuario, id_categoria_producto)
@@ -129,7 +110,7 @@ class ProductoQueries
         return Database::executeRow($sql, $params);
     }
 
-
+    //Método para realizar el mantenimiento eliminar(delete)
     public function deleteRow()
     {
         $sql = 'DELETE FROM producto
@@ -137,8 +118,8 @@ class ProductoQueries
         $params = array($this->id);
         return Database::executeRow($sql, $params);
     }
-    
 
+    //Método para realizar el mantenimiento actualizar(update)
     public function updateRow($current_image)
     {
         ($this->imgp) ? Validator::deleteFile($this->getRuta(), $current_image) : $this->imgp = $current_image;
@@ -149,7 +130,7 @@ class ProductoQueries
         $params = array($this->imgp, $this->nombrep, $this->descripp,  $this->estadop, $this->descuentop, $this->usuario, $this->categp, $this->id);
         return Database::executeRow($sql, $params);
     }
- 
+
     // Método para obtener las tallas de un producto.
     public function readTallasProducto()
     {
@@ -167,9 +148,10 @@ class ProductoQueries
         FROM material
         INNER JOIN detalle_producto USING(id_material) WHERE id_producto = ?';
         $params = array($this->id);
-        return Database::getRows($sql,  $params );
+        return Database::getRows($sql,  $params);
     }
 
+    // Método para obtener el precio del producto
     public function readPrecioProducto()
     {
         $sql = 'SELECT  precio_producto
@@ -179,10 +161,11 @@ class ProductoQueries
         return Database::getRow($sql, $params);
     }
 
-    //CARGAR LOS COMENTARIOS//
-    public function cargarComentarios(){
+    //Método para cargar comentarios
+    public function cargarComentarios()
+    {
 
-        $sql="SELECT b.comentario_producto, b.fecha_comentario, b.calificacion_producto, e.nombre_cliente, c.nombre_producto, b.id_valoracion, c.id_producto, h.id_detalle_producto, b.estado_comentario
+        $sql = "SELECT b.comentario_producto, b.fecha_comentario, b.calificacion_producto, e.nombre_cliente, c.nombre_producto, b.id_valoracion, c.id_producto, h.id_detalle_producto, b.estado_comentario
 		from valoracion b 
 		INNER JOIN detalle_pedido a using (id_detalle_pedido)
 		INNER JOIN pedido d using (id_pedido)
@@ -190,35 +173,34 @@ class ProductoQueries
 		INNER JOIN detalle_producto h using (id_detalle_producto)
 		INNER JOIN producto c using (id_producto) 
 		where id_producto = ? and estado_comentario = 'true'";
-         $params = array($this->id);
-         return Database::getRows($sql, $params);
-     }
+        $params = array($this->id);
+        return Database::getRows($sql, $params);
+    }
 
-     //Para hacer reporte general de tallas por material
-     public function ProductoPorMaterial()
-     {
-         $sql = 'SELECT talla, sum(existencia) suma
+    //Para hacer reporte general de tallas por material
+    public function ProductoPorMaterial()
+    {
+        $sql = 'SELECT talla, sum(existencia) suma
          FROM detalle_producto
          INNER JOIN talla USING(id_talla)
          INNER JOIN material USING(id_material)
          WHERE id_material = ?
          group by talla
          ORDER BY talla';
-         $params = array($this->material);
-         return Database::getRows($sql, $params);
-     }
+        $params = array($this->material);
+        return Database::getRows($sql, $params);
+    }
 
-     public function ProductosPorMarca()
-     {
-         $sql = 'SELECT nombre_producto, sum(existencia) suma
+    public function ProductosPorMarca()
+    {
+        $sql = 'SELECT nombre_producto, sum(existencia) suma
          FROM detalle_producto
          INNER JOIN marca USING(id_marca)
          INNER JOIN producto USING(id_producto)
          WHERE id_marca = ?
          group by nombre_producto
          ORDER BY nombre_producto';
-         $params = array($this->nombrep);
-         return Database::getRows($sql, $params);
-     }
-
+        $params = array($this->nombrep);
+        return Database::getRows($sql, $params);
+    }
 }

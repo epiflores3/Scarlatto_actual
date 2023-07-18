@@ -1,13 +1,10 @@
 <?php
 require_once('../../helpers/database.php');
 
+//Clase para poder tener acceso a todos de la entidad requerida
 class FiltroQueries
 {
-     /*
-    *   Métodos para realizar las operaciones de buscar(search) de marca
-    */
-   
-
+    //Método para realizar el mantenimiento read(leer)
     public function readAllAnillo()
     {
         $sql = "SELECT producto.id_producto,producto.nombre_producto,producto.imagen_principal, producto.descripcion_producto, talla.talla, categoria_producto.nombre_categoria, material.nombre_material, marca.marca
@@ -20,6 +17,4 @@ class FiltroQueries
         where  categoria_producto.nombre_categoria='Compromiso' and producto.nombre_producto like 'Anillo%' ";
         return Database::getRows($sql);
     }
-
-  
 }

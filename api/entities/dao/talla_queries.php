@@ -1,16 +1,17 @@
 <?php
 require_once('../../helpers/database.php');
 
+//Clase para poder tener acceso a todos de la entidad requerida
 class TallaQueries
 {
-
+    //Método para realizar el mantenimiento read(leer)
     public function readAll()
     {
         $sql = 'SELECT id_talla, talla
         FROM talla';
         return Database::getRows($sql);
     }
-   
+
     public function readOne()
     {
         $sql = 'SELECT id_talla, talla 
@@ -20,6 +21,7 @@ class TallaQueries
         return Database::getRow($sql, $params);
     }
 
+    //Método para realizar el mantenimiento eliminar(delete)
     public function deleteRow()
     {
         $sql = 'DELETE FROM talla
@@ -27,8 +29,8 @@ class TallaQueries
         $params = array($this->id);
         return Database::executeRow($sql, $params);
     }
-    
-   
+
+    //Método para realizar el mantenimiento actualizar(update)
     public function createRow()
     {
         $sql = 'INSERT INTO talla(talla)
@@ -37,6 +39,7 @@ class TallaQueries
         return Database::executeRow($sql, $params);
     }
 
+    //Método para realizar el mantenimiento actualizar(update)
     public function updateRow()
     {
         $sql = 'UPDATE talla
@@ -46,6 +49,7 @@ class TallaQueries
         return Database::executeRow($sql, $params);
     }
 
+    //Método para realizar el mantenimiento buscar(search)
     public function searchRows($value)
     {
         $sql = 'SELECT id_talla, talla
@@ -54,6 +58,4 @@ class TallaQueries
         $params = array("%$value%");
         return Database::getRows($sql, $params);
     }
-
-    
 }

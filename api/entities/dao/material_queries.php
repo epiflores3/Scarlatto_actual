@@ -1,10 +1,10 @@
 <?php
 require_once('../../helpers/database.php');
 
+//Clase para poder tener acceso a todos de la entidad requerida
 class MaterialQueries
 {
-    //´´¡
-
+    //Método para realizar el mantenimiento buscar(search)
     public function searchRows($value)
     {
         $sql = 'SELECT id_material, nombre_material
@@ -14,7 +14,8 @@ class MaterialQueries
         return Database::getRows($sql, $params);
     }
 
-    
+
+    //Método para realizar el mantenimiento read(leer)
     public function readAll()
     {
         $sql = 'SELECT id_material, nombre_material
@@ -22,16 +23,16 @@ class MaterialQueries
         return Database::getRows($sql);
     }
 
-    
+
     public function readOne()
     {
-        $sql='SELECT * FROM material
+        $sql = 'SELECT * FROM material
         WHERE id_material = ?';
         $params = array($this->id);
         return Database::getRow($sql, $params);
     }
 
-    //si
+    //Método para realizar el mantenimiento eliminar(delete)
     public function deleteRow()
     {
         $sql = 'DELETE FROM material
@@ -40,6 +41,7 @@ class MaterialQueries
         return Database::executeRow($sql, $params);
     }
 
+    //Método para realizar el mantenimiento crear(create)
     public function createRow()
     {
         $sql = 'INSERT INTO material(nombre_material)
@@ -48,6 +50,7 @@ class MaterialQueries
         return Database::executeRow($sql, $params);
     }
 
+    //Método para realizar el mantenimiento actualizar(update)
     public function updateRow()
     {
         $sql = 'UPDATE material
@@ -66,6 +69,4 @@ class MaterialQueries
         GROUP BY nombre_material ORDER BY cantidad DESC';
         return Database::getRows($sql);
     }
-
-
 }

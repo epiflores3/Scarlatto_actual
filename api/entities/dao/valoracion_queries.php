@@ -1,9 +1,10 @@
 <?php
 require_once('../../helpers/database.php');
 
+//Clase para poder tener acceso a todos de la entidad requerida
 class ValoracionQueries
 {
-
+    //Método para realizar el mantenimiento buscar(search)
     public function readAll()
     {
         $sql = 'SELECT id_valoracion, calificacion_producto, comentario_producto, fecha_comentario, estado_comentario
@@ -15,7 +16,7 @@ class ValoracionQueries
         $params = array($this->id);
         return Database::getRows($sql, $params);
     }
-   
+
     public function readOne()
     {
         $sql = 'SELECT id_talla, talla 
@@ -25,6 +26,7 @@ class ValoracionQueries
         return Database::getRow($sql, $params);
     }
 
+    //Método para realizar el mantenimiento eliminar(delete)
     public function deleteRow()
     {
         $sql = 'DELETE FROM talla
@@ -32,7 +34,8 @@ class ValoracionQueries
         $params = array($this->id);
         return Database::executeRow($sql, $params);
     }
-    
+
+    //Método para realizar el mantenimiento actualizar(update)
     public function updateRow()
     {
         $sql = 'UPDATE talla
@@ -42,17 +45,20 @@ class ValoracionQueries
         return Database::executeRow($sql, $params);
     }
 
+    //Método para crear la valoración 
     public function createValoComentario()
     {
         $fecha = date("d-m-Y");
         $estado = 'true';
-        $sql="INSERT INTO valoracion(calificacion_producto, comentario_producto, fecha_comentario, estado_comentario, id_detalle_pedido)
+        $sql = "INSERT INTO valoracion(calificacion_producto, comentario_producto, fecha_comentario, estado_comentario, id_detalle_pedido)
         VALUES(?, ?, ?, ?, ?)";
-        $params = array( $this->calificacion, $this->comentario, $fecha, $estado, $this->id_detalle_pedido);
+        $params = array($this->calificacion, $this->comentario, $fecha, $estado, $this->id_detalle_pedido);
         return Database::executeRow($sql, $params);
     }
 
-    public function validarComentario(){
+    //Método para validar el comentraio sea exitoso
+    public function validarComentario()
+    {
         $sql = 'SELECT a.comentario_producto from valoracion a 
 		INNER JOIN detalle_pedido b using (id_detalle_pedido)
 		INNER JOIN pedido d using (id_pedido)
@@ -61,10 +67,5 @@ class ValoracionQueries
 		where id_detalle_pedido = ?';
         $params = array($this->id_detalle_pedido);
         return Database::getRow($sql, $params);
-     }
-
-   
-    
-     
-
+    }
 }
