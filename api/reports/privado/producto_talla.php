@@ -26,6 +26,7 @@ if ($dataProducto = $producto->readAll()) {
         // Cuarto Indica si se dibujan los bordes alrededor de la celda: 0 Sin bordes, 1 Marco, o tambien L izquierda, T arriba, R derecha, B abajo
         // Quinto indica donde puede ir la posición: 0 A la derecha, 1 Al comienzo de la siguiente línea, 2 Abajo
         // Sexto indica el alineamiento del texto: L Alineación a la izquierda, C centro, R Alineación a la derecha
+        
 
 
     $pdf->cell(93, 10, 'Talla', 1, 0, 'C', 1);
