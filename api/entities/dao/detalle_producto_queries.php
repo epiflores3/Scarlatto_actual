@@ -131,7 +131,7 @@ class DetalleProductoQueries
          return Database::getRows($sql);
      }
 
-   
+    // Filtra todas las tallas que le pertenecen a un producto en específico
     public function productoTalla()
     {
         $sql = 'SELECT talla, sum(existencia) suma

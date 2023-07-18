@@ -273,22 +273,22 @@ async function openDeleteValo(id) {
 }
 
 function openReportProductoPorMaterial() {
-    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
+   //Se declara una variable donde se pone la dirección del servidor.
     const PATH = new URL(`${SERVER_URL}reports/privado/producto_material.php`);
-    // Se abre el reporte en una nueva pestaña del navegador web.
+  // Se abre el reporte en una ventana aparte en el navegador
     window.open(PATH.href);
 }
 
 function openReportProductoPorMarcas() {
-    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
+   //Se declara una variable donde se pone la dirección del servidor.
     const PATH = new URL(`${SERVER_URL}reports/privado/producto_marca.php`);
-    // Se abre el reporte en una nueva pestaña del navegador web.
+     // Se abre el reporte en una ventana aparte en el navegador
     window.open(PATH.href);
 }
 
 function openReportTallaPorProducto() {
-    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
+    //Se declara una variable donde se pone la dirección del servidor.
     const PATH = new URL(`${SERVER_URL}reports/privado/producto_talla.php`);
-    // Se abre el reporte en una nueva pestaña del navegador web.
+    // Se abre el reporte en una ventana aparte en el navegador
     window.open(PATH.href);
 }
