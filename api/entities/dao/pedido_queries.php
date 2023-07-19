@@ -202,7 +202,7 @@ class PedidoQueries
     }
 
 
-    //Para hacer grafico de pastel
+    //Para hacer grafico de pastel, donde se muestra la cantidad de los pedidos por estado.
     public function CantidadEstadoPedido()
     {
         $sql = 'SELECT pedido.estados_pedido, ROUND((COUNT(id_pedido) * 100.0 / (SELECT COUNT(id_detalle_pedido) FROM detalle_pedido)), 2) porcentaje

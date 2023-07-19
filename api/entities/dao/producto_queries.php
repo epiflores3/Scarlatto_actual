@@ -191,7 +191,7 @@ class ProductoQueries
         return Database::getRows($sql, $params);
     }
 
-     //Función para hacer reporte general de productos por marca
+    //Función para hacer reporte general de productos por marca
     public function ProductosPorMarca()
     {
         $sql = 'SELECT nombre_producto, sum(existencia) suma

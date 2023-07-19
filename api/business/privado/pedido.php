@@ -138,7 +138,7 @@ if (isset($_GET['action'])) {
                     $result['exception'] = Database::getException();
                 }
                 break;
-
+                // Se mandar a llamar a la consulta, para que se pueda mostrar futuramente la gráfica de pastel
                  case 'cantidadEstadosPedidos':
                     if ($result['dataset'] = $pedido->CantidadEstadoPedido()) {
                         $result['status'] = 1;
@@ -147,7 +147,7 @@ if (isset($_GET['action'])) {
                     }
                 break;
 
-                //Se manda a llamar el método que trae los datos de la base de datos se cconvierte en json para mandarlo a JS
+                //Se manda a llamar el método que trae los datos de la base de datos, que se convertran en grafico lineal
                 case 'cantidadDePedidosMasSolicitados':
                     if ($result['dataset'] = $pedido->cantidadPedidosFechas($_POST['fecha_inicial'], $_POST['fecha_final'])) {
                         $result['status'] = 1;

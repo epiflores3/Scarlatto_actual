@@ -60,6 +60,7 @@ class MaterialQueries
         return Database::executeRow($sql, $params);
     }
 
+    //Consulta para mostrar la cantidad de productos por el material
     public function cantidadProductosMaterial()
     {
         $sql = 'SELECT nombre_material, COUNT(id_producto) cantidad

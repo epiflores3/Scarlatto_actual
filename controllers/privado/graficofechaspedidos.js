@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 SAVE_FORM.addEventListener('submit', async (event) => {
-    // Evaita cargar la pagina despues de enviar el formulario
+    // Evita cargar la pagina despues de enviar el formulario
     event.preventDefault();
     // Verifica la acción que se hara
 

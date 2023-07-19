@@ -93,7 +93,7 @@ if (isset($_GET['action'])) {
                     $result['exception'] = Database::getException();
                 }
                 break;
-
+                //Se manda a llamar a la consulta, para poder despues mostrar la gráfica
             case 'cantidadProductosMaterial':
                     if ($result['dataset'] = $material->cantidadProductosMaterial()) {
                         $result['status'] = 1;

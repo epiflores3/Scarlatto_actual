@@ -71,7 +71,7 @@ class DetalleProductoQueries
         return Database::executeRow($sql, $params);
     }
 
-    //Para hacer grafico de pastel
+    //Se hace la consulta para mostrar los productos por marca 
     public function cantidadProductosMarcas()
     {
         $sql = 'SELECT marca, ROUND((COUNT(id_producto) * 100.0 / (SELECT COUNT(id_detalle_producto) FROM detalle_producto)), 2) porcentaje
@@ -124,7 +124,7 @@ class DetalleProductoQueries
     }
 
 
-
+    // Se hace la consulta para que se muestre los porcentajes de los productos mas vendidos 
     public function porcentajeProducto()
     {
         $sql = 'SELECT nombre_producto, ROUND((COUNT(id_producto) * 100.0 / (SELECT COUNT(id_detalle_producto) FROM detalle_producto)), 2) porcentaje
