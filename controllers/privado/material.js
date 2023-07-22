@@ -1,17 +1,20 @@
+// Constante para dirgirse a la ruta de API.
 const MATERIAL_API = 'business/privado/material.php';
-
+// Constante para obtener los datos del archivo a utilizar y poder realizar el combobox
 const MODAL_TITLE = document.getElementById('modal-title');
-
+//Constante para poder guardar los datos del modal
 const SAVE_MODAL = new bootstrap.Modal(document.getElementById('agregarmaterial'));
-
 // Constantes para cuerpo de la tabla
 const TBODY_ROWS = document.getElementById('tbody-rows');
 const RECORDS = document.getElementById('records');
+//Constante para poder guardar los datos del formulario
 const SAVE_FORM = document.getElementById('producto-modal');
+// Constante para poder hacer uso del formulario de buscar.
 const SEARCH_FORM = document.getElementById('search-form');
 
+//Método que se utiliza cuando el mantenimiento leer ha cargado
 document.addEventListener('DOMContentLoaded', () => {
-    // Llamada a la función para llenar la tabla con los registros disponibles.
+    // Llena la tabla con los registros que existan.
     fillTable();
 });
 
@@ -113,8 +116,8 @@ async function openUpdate(id) {
         // Se asigna título para la caja de diálogo.
         MODAL_TITLE.textContent = 'Actualizar material';
         // Se inicializan los campos del formulario.
-      
-       document.getElementById('id').value = JSON.dataset.id_material;
+
+        document.getElementById('id').value = JSON.dataset.id_material;
         document.getElementById('material').value = JSON.dataset.nombre_material;
 
     } else {

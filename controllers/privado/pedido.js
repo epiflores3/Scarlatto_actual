@@ -1,24 +1,27 @@
-// Constante para completar la ruta de la API.
+// Constante para dirgirse a la ruta de API.
 const PEDIDO_API = 'business/privado/pedido.php';
+// Constante para obtener los datos del archivo a utilizar y poder realizar el combobox
 const CLIENTE_API = 'business/privado/cliente.php';
-//Constante para cambiarle el titulo a el modal
+//Constante para poder guardar los datos del modal
 const DETALLE_MODAL = new bootstrap.Modal(document.getElementById('detallepedido'));
+// Constante para obtener los datos del archivo a utilizar y poder realizar el combobox
 const MODAL_TITLE = document.getElementById('modal-title');
+//Constante para poder guardar los datos del modal
 const SAVE_MODAL = new bootstrap.Modal(document.getElementById('agregarpedido'));
-// // Constante para establecer el formulario de buscar.
+// Constante para poder hacer uso del formulario de buscar.
 const SEARCH_FORM = document.getElementById('search-form');
 // Constantes para cuerpo de la tabla
 const TBODYDETALLE_ROWS = document.getElementById('tbody-rowsdt');
 const RECORDSDETALLE = document.getElementById('recordsDetalle');
+// Constantes para cuerpo de la tabla
 const TBODY_ROWS = document.getElementById('tbody-rows');
 const RECORDS = document.getElementById('records');
+//Constante para poder guardar los datos del formulario
 const SAVE_FORM = document.getElementById('save-form');
-const microfono = document.querySelector('microfono');
-const popup = document.querySelector('popup');
 
-//Método para que cargue graficamente la tabla
+//Método que se utiliza cuando el mantenimiento leer ha cargado
 document.addEventListener('DOMContentLoaded', () => {
-    // Llamada a la función para llenar la tabla con los registros disponibles.
+    // Llena la tabla con los registros que existan.
     fillTable();
 });
 
@@ -31,19 +34,6 @@ SEARCH_FORM.addEventListener('submit', (event) => {
     // Llamada a la función para llenar la tabla con los resultados de la búsqueda.
     fillTable(FORM);
 });
-
-// microfono.addEventListener('click', ()=>{
-//     const recognition = new webkitSpeechRecognitio();
-//     recognition.lang = 'es-Es';
-//     recognition.start();
-
-//     recognition.onstart = ()=>{
-//         popup.classList.add('popup--dinamico');
-//     }
-
-// })
-
-
 
 SAVE_FORM.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.

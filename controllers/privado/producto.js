@@ -1,41 +1,33 @@
+// Constante para dirgirse a la ruta de API.
 const PRODUCTO_API = 'business/privado/producto.php';
-
+// Constante para obtener los datos del archivo a utilizar y poder realizar el combobox
 const CATEGP_API = 'business/privado/categoriap.php';
-
+// Constante para obtener los datos del archivo a utilizar y poder realizar el combobox
 const USUARIOP_API = 'business/privado/usuario.php';
-// Constante para cambiarle el titulo a el modal
+// Constante para obtener los datos del archivo a utilizar y poder realizar el combobox
 const MODAL_TITLE = document.getElementById('modal-title');
-
+//Constante para poder guardar los datos del modal
 const SAVE_MODAL = new bootstrap.Modal(document.getElementById('agregarproducto'));
-
-
+//Constante para poder guardar los datos del modal
 const VALO_MODAL = new bootstrap.Modal(document.getElementById('lascalificaciones'));
-
-
 // Constantes para cuerpo de la tabla
 const TBODY_ROWS = document.getElementById('tbody-rows');
-//VALO
+// Constantes para cuerpo de la tabla
 const TBODYVALO_ROWS = document.getElementById('tbody-rowsv');
 const RECORDSVALO = document.getElementById('recordsv');
-
+// Constantes para cuerpo de la tabla
 const RECORDS = document.getElementById('records');
-
+//Constante para poder guardar los datos del formulario
 const SAVE_FORM = document.getElementById('save-form');
-
+// Constante para poder hacer uso del formulario de buscar.
 const SEARCH_FORM = document.getElementById('search-form');
 
+//Método que se utiliza cuando el mantenimiento leer ha cargado
 document.addEventListener('DOMContentLoaded', () => {
-    // Llamada a la función para llenar la tabla con los registros disponibles.
+    // Llena la tabla con los registros que existan.
     fillTable();
 });
 
-
-
-
- // <td><img src="${SERVER_URL}imagenes/productos/${row.imagen_principal}" class="materialboxed" height="100"></td>
-            // <td><i class="material-icons">${icon}</i></td>
-         //   (row.estado_producto) ? icon = 'visibility' : icon = 'visibility_off';
-            
 SEARCH_FORM.addEventListener('submit', (event) => {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
@@ -92,7 +84,7 @@ async function fillTable(form = null) {
         // Se recorre el conjunto de registros fila por fila.
         JSON.dataset.forEach(row => {
 
-          (row.estado_producto) ? icon = 'visibility' : icon = 'visibility_off';
+            (row.estado_producto) ? icon = 'visibility' : icon = 'visibility_off';
             // Se crean y concatenan las filas de la tabla con los datos de cada registro.
             TBODY_ROWS.innerHTML += `
             <tr>
@@ -273,16 +265,16 @@ async function openDeleteValo(id) {
 }
 
 function openReportProductoPorMaterial() {
-   //Se declara una variable donde se pone la dirección del servidor.
+    //Se declara una variable donde se pone la dirección del servidor.
     const PATH = new URL(`${SERVER_URL}reports/privado/producto_material.php`);
-  // Se abre el reporte en una ventana aparte en el navegador
+    // Se abre el reporte en una ventana aparte en el navegador
     window.open(PATH.href);
 }
 
 function openReportProductoPorMarcas() {
-   //Se declara una variable donde se pone la dirección del servidor.
+    //Se declara una variable donde se pone la dirección del servidor.
     const PATH = new URL(`${SERVER_URL}reports/privado/producto_marca.php`);
-     // Se abre el reporte en una ventana aparte en el navegador
+    // Se abre el reporte en una ventana aparte en el navegador
     window.open(PATH.href);
 }
 

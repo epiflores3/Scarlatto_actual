@@ -1,18 +1,21 @@
-// Constante para completar la ruta de la API.
+// Constante para dirgirse a la ruta de API.
 const MARCA_API = 'business/privado/marca.php';
+// Constante para obtener los datos del archivo a utilizar y poder realizar el combobox
 const MODAL_TITLE = document.getElementById('modal-title');
-
+//Constante para poder guardar los datos del modal
 const SAVE_MODAL = new bootstrap.Modal(document.getElementById('agregarmarca'));
-// Constante para establecer el formulario de buscar.
+// Constante para poder hacer uso del formulario de buscar.
 const SEARCH_FORM = document.getElementById('search-form');
 // Constantes para cuerpo de la tabla
 const TBODY_ROWS = document.getElementById('tbody-rows');
 const RECORDS = document.getElementById('records');
+//Constante para poder guardar los datos del formulario
 const SAVE_FORM = document.getElementById('save-form');
 
+//Método que se utiliza cuando el mantenimiento leer ha cargado
 document.addEventListener('DOMContentLoaded', () => {
-    // Llamada a la función para llenar la tabla con los registros disponibles.
-    fillTable();
+   // Llena la tabla con los registros que existan.
+   fillTable();
 });
 
 SAVE_FORM.addEventListener('submit', async (event) => {

@@ -1,23 +1,24 @@
-// Constante que cnecta php con javaScript
+// Constante para dirgirse a la ruta de API.
 const USUARIO_API = 'business/privado/usuario.php';
-const TIPOUS_API ='business/privado/tipo_usuario.php';
-const ESTADO_API ='business/privado/estado_usuario.php';
-
+// Constante para obtener los datos del archivo a utilizar y poder realizar el combobox
+const TIPOUS_API = 'business/privado/tipo_usuario.php';
+// Constante para obtener los datos del archivo a utilizar y poder realizar el combobox
+const ESTADO_API = 'business/privado/estado_usuario.php';
+// Constante para obtener los datos del archivo a utilizar y poder realizar el combobox
 const MODAL_TITLE = document.getElementById('modal-title');
-
+//Constante para poder guardar los datos del modal
 const SAVE_MODAL = new bootstrap.Modal(document.getElementById('agregarusuario'));
-
+//Constante para poder guardar los datos del formulario
 const SAVE_FORM = document.getElementById('save-form');
-
+// Constante para poder hacer uso del formulario de buscar.
 const SEARCH_FORM = document.getElementById('search-form');
 // Constantes para cuerpo de la tabla
 const TBODY_ROWS = document.getElementById('tbody-rows');
-
 const RECORDS = document.getElementById('records');
 
-
+//Método que se utiliza cuando el mantenimiento leer ha cargado
 document.addEventListener('DOMContentLoaded', () => {
-    // llama a la tabla
+    // Llena la tabla con los registros que existan.
     fillTable();
 });
 
@@ -64,7 +65,7 @@ async function fillTable(form = null) {
     if (JSON.status) {
         // Se recorre el conjunto de registros fila por fila.
         JSON.dataset.forEach(row => {
-            
+
             // Se crean y concatenan las filas de la tabla con los datos de cada registro.
             TBODY_ROWS.innerHTML += `
             <tr>
@@ -108,7 +109,7 @@ function openCreate() {
     SAVE_FORM.reset();
     // Se asigna título a la caja de diálogo.
     MODAL_TITLE.textContent = 'Crear Usuario';
-   // cargar cmb
+    // cargar cmb
     fillSelect(TIPOUS_API, 'readAll', 'tipousuario');
     fillSelect(ESTADO_API, 'readAll', 'estadous');
 
@@ -161,5 +162,5 @@ async function openDelete(id) {
         }
     }
 
-    
+
 }

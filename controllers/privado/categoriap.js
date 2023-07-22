@@ -1,45 +1,42 @@
-// Constante para completar la ruta de la API.
+// Constante para dirgirse a la ruta de API.
 const CATEGORIA_API = 'business/privado/categoriap.php';
-//Constante para cambiarle el titulo a el modal
+// Constante para obtener los datos del archivo a utilizar y poder realizar el combobox
 const MODAL_TITLE = document.getElementById('modal-title');
-
+//Constante para poder guardar los datos del modal
 const SAVE_MODAL = new bootstrap.Modal(document.getElementById('agregarcategoriapro'));
+//Constante para poder guardar los datos del formulario
 const SAVE_FORM = document.getElementById('categ-form');
+// Constante para poder hacer uso del formulario de buscar.
 const SEARCH_FORM = document.getElementById('search-form');
 // Constantes para cuerpo de la tabla
 const TBODY_ROWS = document.getElementById('tbody-rows');
 const RECORDS = document.getElementById('records');
 
-
-//Método para que cargue graficamente la tabla
+//Método que se utiliza cuando el mantenimiento leer ha cargado
 document.addEventListener('DOMContentLoaded', () => {
-    // Llamada a la función para llenar la tabla con los registros disponibles.
+    // Llena la tabla con los registros que existan.
     fillTable();
 });
 
+// Método que se utiliza para el formulario de buscar.
 SEARCH_FORM.addEventListener('submit', (event) => {
-    // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
-    // Constante tipo objeto con los datos del formulario.
     const FORM = new FormData(SEARCH_FORM);
-    // Llamada a la función para llenar la tabla con los resultados de la búsqueda.
+    //Llena la tabla con las respuestas de la búsqueda.
     fillTable(FORM);
 });
 
 
+// Método que sirve para el formulario se envía para ser guardado
 SAVE_FORM.addEventListener('submit', async (event) => {
-    // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
-    // Se verifica la acción a realizar.
     (document.getElementById('id').value) ? action = 'update' : action = 'create';
-    // Constante tipo objeto con los datos del formulario.
     const FORM = new FormData(SAVE_FORM);
-    // Petición para guardar los datos del formulario.
     const JSON = await dataFetch(CATEGORIA_API, action, FORM);
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    // Se comprueba si la respuesta es correcta, sino muestra un mensaje de error.
     if (JSON.status) {
         SAVE_MODAL.hide();
-        // Se carga nuevamente la tabla para visualizar los cambios.
+        // Se carga la tabla para ver los cambios.
         fillTable();
         sweetAlert(1, JSON.message, true);
     } else {
@@ -47,34 +44,31 @@ SAVE_FORM.addEventListener('submit', async (event) => {
     }
 });
 
-
+//Función de preparación para poder insertar un nuevo registro
 function openCreate() {
-
     SAVE_FORM.reset();
-    // Se asigna título a la caja de diálogo.
+    // Se da un título que se mostrará en el modal.
     MODAL_TITLE.textContent = 'Crear categoria';
 }
 
-//Funcion para traer los registros disponibles de la base a el sistema
+//Función que llena la tabla con todos los registros que se necuentran en la base
 async function fillTable(form = null) {
     // Se inicializa el contenido de la tabla.
     TBODY_ROWS.innerHTML = '';
     RECORDS.textContent = '';
     // Se verifica la acción a realizar.
     (form) ? action = 'search' : action = 'readAll';
-    // Petición para obtener los registros disponibles.
+    // Verificación de la acción a hacer.
     const JSON = await dataFetch(CATEGORIA_API, action, form);
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    // Se comprueba si la respuesta es correcta, sino muestra un mensaje de error.
     if (JSON.status) {
         // Se recorre el conjunto de registros fila por fila.
         JSON.dataset.forEach(row => {
             // Se crean y concatenan las filas de la tabla con los datos de cada registro.
             TBODY_ROWS.innerHTML += `
             <tr>
-
                 <td>${row.nombre_categoria}</td>
                 <td>
-
                     <button onclick="openReport(${row.id_categoria_producto})" type="button" class="btn btn-success">
                         <img height="20px" width="20px" src="../../resources/img/imgtablas/ojo.png" alt="ver">
                     </button>
@@ -87,13 +81,10 @@ async function fillTable(form = null) {
                     <button onclick="openDelete(${row.id_categoria_producto})" type="button" class="btn btn-danger"><img height="20px"
                             width="20px" src="../../resources/img/imgtablas/delete.png" alt="eliminar">
                     </button>
-
-
                 </td>
             </tr>
             `;
         });
-
         RECORDS.textContent = JSON.message;
     } else {
         sweetAlert(4, JSON.exception, true);
