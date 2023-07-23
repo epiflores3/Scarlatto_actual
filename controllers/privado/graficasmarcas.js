@@ -1,21 +1,19 @@
-// Constante para completar la ruta de la API.
+// Constante para dirgirse a la ruta de API.
 const PRODUCTO_API = 'business/privado/detalle_producto.php';
 
-// Método manejador de eventos para cuando el documento ha cargado.
+//Método que se utiliza cuando el mantenimiento leer ha cargado
 document.addEventListener('DOMContentLoaded', () => {
-  
-    // Se manda a llamar a la función para que se muestre el gráfico.
+    //Se manda a llamar al metodo, para cargarlo 
     graficoPastelCategorias();
- 
 });
 
-//Se crea la función de que hara toda la gráfica funcione 
+//Se crea la función de que hará que la gráfica funcione 
 async function graficoPastelCategorias() {
-    // Petición para obtener los datos del gráfico.
+    // Solicitar la informarcion del gráfico.
     const JSON = await dataFetch(PRODUCTO_API, 'cantidadProductosMarcas');
-    // Se comprueba si hay una respuesta, de lo contrario se quita la etiqueta canvas.
+    // Se comprueba si hay una respuesta a lo solicitado, sino se quita la etiqueta canvas.
     if (JSON.status) {
-        // Se declaran los arreglos para guardar la información y despues graficarlos.
+        // Se declaran los arreglos para guardar la información y luego graficarlos.
         let marcas = [];
         let porcentaje = [];
         // Se recorre el conjunto de registros fila a fila a través row.
