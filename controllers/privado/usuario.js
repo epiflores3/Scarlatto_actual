@@ -108,7 +108,7 @@ function openCreate() {
 
     SAVE_FORM.reset();
     // Se asigna título a la caja de diálogo.
-    MODAL_TITLE.textContent = 'Crear Usuario';
+    MODAL_TITLE.textContent = 'Crear usuario';
     // cargar cmb
     fillSelect(TIPOUS_API, 'readAll', 'tipousuario');
     fillSelect(ESTADO_API, 'readAll', 'estadous');
@@ -143,7 +143,7 @@ async function openUpdate(id) {
 
 async function openDelete(id) {
     // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
-    const RESPONSE = await confirmAction('¿Desea eliminar la categoría de forma permanente?');
+    const RESPONSE = await confirmAction('¿Desea eliminar el usuario de forma permanente?');
     // Se verifica la respuesta del mensaje.
     if (RESPONSE) {
         // Se define una constante tipo objeto con los datos del registro seleccionado.

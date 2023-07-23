@@ -29,7 +29,7 @@ if ($dataMarca = $marca->readAll()) {
         
 
     $pdf->cell(93, 10, 'Producto', 1, 0, 'C', 1);
-    $pdf->cell(93, 10, 'Existencias:', 1, 1, 'C', 1);
+    $pdf->cell(93, 10, 'Existencias', 1, 1, 'C', 1);
 
      // Se estabelce un color para la celda que muestra por lo que se filtra.
     $pdf->setFillColor(225);

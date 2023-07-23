@@ -28,7 +28,7 @@ SAVE_FORM.addEventListener('submit', async (event) => {
         });
         document.getElementById('grafico').innerHTML = '<canvas id="chart2"></canvas>';
         // Llamada a la función que genera gráfico linrsl. Se encuentra en el archivo components.js
-        lineGraph('chart2', fechas, pedidos, 'Cantidad de pedidos', 'Top 5 de fechas con mas pedidos' );
+        lineGraph('chart2', fechas, pedidos, 'Cantidad de pedidos', 'Top 5 de fechas con más pedidos' );
         sweetAlert(1, JSON.message, true);
 
     } else {

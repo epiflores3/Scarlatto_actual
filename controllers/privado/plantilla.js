@@ -79,7 +79,7 @@ NAV.innerHTML = `
             <div class="col-2">
             <i class="fa-solid fa-file-circle-exclamation"></i>
             </div>
-            <div class="col-10">Detalles producto</div>
+            <div class="col-10">Detalles productos</div>
         </div>
         </a>
     </li>
