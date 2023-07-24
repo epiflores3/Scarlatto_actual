@@ -76,6 +76,7 @@ async function readOrderDetail() {
                         <a onclick="openDelete(${row.id_detalle_pedido})" class="btn waves-effect red tooltipped" data-tooltip="Remover">
                             <i class="material-icons">remove_shopping_cart</i>
                         </a>
+                        
                     </td>
                 </tr>
             `;
@@ -107,7 +108,12 @@ function openUpdate(id, quantity) {
 *   Función asíncrona para mostrar un mensaje de confirmación al momento de finalizar el pedido.
 *   Parámetros: ninguno.
 *   Retorno: ninguno.
+
+
 */
+
+
+
 async function finishOrder() {
     // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
     const RESPONSE = await confirmAction('¿Está seguro de finalizar el pedido?');
@@ -115,9 +121,16 @@ async function finishOrder() {
     if (RESPONSE) {
         // Petición para finalizar el pedido en proceso.
         const JSON = await dataFetch(PEDIDO_API, 'finishOrder');
+        const JSON2 = await dataFetch(PEDIDO_API, 'capIdPedido');
+
+        
         // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
         if (JSON.status) {
+            
+            // console.log(JSON2.dataset.id_pedido);
+            openFactu(JSON2.dataset.id_pedido);
             sweetAlert(1, JSON.message, true, 'producto.html');
+
         } else {
             sweetAlert(2, JSON.exception, false);
         }
@@ -148,4 +161,15 @@ async function openDelete(id) {
             sweetAlert(2, JSON.exception, false);
         }
     }
+
+
+}
+
+function openFactu(id_pedido) {
+    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
+    const PATH = new URL(`${SERVER_URL}reports/publico/comprobante.php`);
+    // Se agrega un parámetro a la ruta con el valor del registro seleccionado.
+    PATH.searchParams.append('id_pedido', id_pedido);
+    // Se abre el reporte en una nueva pestaña del navegador web.
+    window.open(PATH.href);
 }

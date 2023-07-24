@@ -74,6 +74,16 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
+                case 'capIdPedido':
+
+                    if ($result['dataset']=$pedido->capIdPedido()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Pedido finalizado correctamente';
+                    } else {
+                        $result['exception'] = 'Ocurrió un problema al finalizar el pedido';
+                    }
+                    break;
+
             case 'cargarHistorial':
                     if (!$pedido->setId($_POST['id_pedido'])) {
                         $result['exception'] = 'Cliente incorrecto';

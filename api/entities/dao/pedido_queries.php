@@ -125,6 +125,13 @@ class PedidoQueries
         return Database::executeRow($sql, $params);
     }
 
+    public function capIdPedido(){
+        $sql = 'SELECT id_pedido FROM pedido
+        where id_pedido = ?';
+        $params = array($_SESSION['id_pedido']);
+        return Database::getRow($sql, $params);
+    }
+
     // Método para actualizar la cantidad de un producto agregado al carrito de compras.
     public function updateDetail()
     {
@@ -221,6 +228,19 @@ class PedidoQueries
 		group by fecha_pedido
 		order by pedidos desc limit 5';
         $params = array($fecha_inicial, $fecha_final);
+        return Database::getRows($sql, $params);
+    }
+
+    public function startReport(){
+        $sql = 'SELECT id_detalle_pedido, nombre_producto, correo_cliente, nombre_cliente, dui_cliente,  detalle_pedido.precio_producto, detalle_pedido.cantidad_producto
+        FROM pedido
+        INNER JOIN cliente USING(id_cliente) 
+        INNER JOIN detalle_pedido USING(id_pedido) 
+        INNER JOIN detalle_producto USING(id_detalle_producto) 
+        INNER JOIN producto USING(id_producto)
+        WHERE id_pedido = ?
+        group by id_detalle_pedido, nombre_producto,correo_cliente, nombre_cliente, dui_cliente, detalle_pedido.precio_producto, detalle_pedido.cantidad_producto';
+        $params = array($this->id);
         return Database::getRows($sql, $params);
     }
 }

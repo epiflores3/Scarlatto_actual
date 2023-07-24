@@ -8,7 +8,7 @@ if (isset($_GET['action'])) {
     // Se instancia la clase correspondiente.
     $cliente = new Cliente;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.  Agregas fullname y id
-    $result = array('status' => 0, 'session' => 0, 'recaptcha' => 0, 'message' => null, 'exception' => null, 'username' => null, 'id'=>0);
+    $result = array('status' => 0, 'session' => 0, 'recaptcha' => 0, 'message' => null, 'exception' => null, 'direccion' => null,  'username' => null,  'id'=>0);
     // Se verifica si existe una sesión iniciada como cliente para realizar las acciones correspondientes.
     if (isset($_SESSION['id_cliente'])) {
         $result['session'] = 1;
@@ -20,6 +20,8 @@ if (isset($_GET['action'])) {
                     $result['status'] = 1;
                     $result['username'] = $_SESSION['correo_cliente'];
                     $result['id']=$_SESSION['id_cliente'];
+                    $result['direccion']=$_SESSION['direccion_cliente'];
+             
                 } else {
                     $result['exception'] = 'Correo de usuario indefinido';
                 }
@@ -112,6 +114,9 @@ if (isset($_GET['action'])) {
                     $result['message'] = 'Autenticación correcta';
                     $_SESSION['id_cliente'] = $cliente->getId();
                     $_SESSION['correo_cliente'] = $cliente->getCorreo();
+                    $_SESSION['direccion_cliente'] = $cliente->getDireccion();
+                  
+            
                 } else {
                     $result['exception'] = 'Clave incorrecta';
                 }
