@@ -1,4 +1,4 @@
-// Constante para dirgirse a la ruta de API.
+// Constante para acceder a la ruta de API.
 const PEDIDO_API = 'business/privado/pedido.php';
 
 //Método que se utiliza cuando el mantenimiento leer ha cargado
@@ -16,7 +16,7 @@ async function graficoPastelEstadoPedido() {
         // Se declaran los arreglos para guardar la información y luego graficarlos.
         let estado = [];
         let porcentaje = [];
-        // Se recorre el conjunto de registros fila a fila a través row.
+        // Se recorre el conjunto de registro dato a dato a través row.
         JSON.dataset.forEach(row => {
             // Se agregan los datos a los arreglos, que tienen que ir como están en la base.
             estado.push(row.estados_pedido);

@@ -1,4 +1,4 @@
-// Constante para dirgirse a la ruta de API.
+// Constante para acceder a la ruta de API.
 const PEDIDOS_API = 'business/privado/pedido.php';
 //Constante para poder guardar los datos del formulario
 const SAVE_FORM = document.getElementById('save-form');
