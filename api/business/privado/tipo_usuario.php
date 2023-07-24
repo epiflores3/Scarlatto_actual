@@ -1,6 +1,7 @@
 <?php
 require_once('../../entities/dto/tipo_usuario.php');
 
+// Se comprueba si se cumplirá una acción, es decir, caso(case) a realizar, si no se llegará a cumplir ninguna acción se mostrará un mensaje de error.
 if (isset($_GET['action'])) {
     // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en el script.
     session_start();
@@ -12,8 +13,8 @@ if (isset($_GET['action'])) {
     if (isset($_SESSION['id_usuario'])) {
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
         switch ($_GET['action']) {
-            
-            case 'readAll':
+                 //Se lee todos los datos que están almacenandos y lo que se agregarán posteriormente
+                 case 'readAll':
                 if ($result['dataset'] = $tipo->readAll()) {
                     $result['status'] = 1;
                     $result['message'] = 'Existen '.count($result['dataset']).' registros';
@@ -23,11 +24,6 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'No hay datos registrados';
                 }
                 break;
-
-                
-
-           
-            
             default:
                 $result['exception'] = 'Acción no disponible dentro de la sesión';
         }

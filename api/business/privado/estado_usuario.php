@@ -1,95 +1,29 @@
 <?php
 require_once('../../entities/dto/estado_usuario.php');
 
+// Se comprueba si se cumplirá una acción, es decir, caso(case) a realizar, si no se llegará a cumplir ninguna acción se mostrará un mensaje de error.
 if (isset($_GET['action'])) {
-    // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en el script.
+    // Se realiza una sesión o se sigue manejando la actual.
     session_start();
-    // Se instancia la clase correspondiente.
+    // Se instancia una clase.
     $estadous = new EstadoUs;
-    // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
+    // Se declara e inicializa un arreglo para guardar el resultado que se retorna.
     $result = array('status' => 0, 'message' => null, 'exception' => null, 'dataset' => null);
-    // Se verifica si existe una sesión iniciada como administrador, de lo contrario se finaliza el script con un mensaje de error.
+    // Se verifica si existe una sesión, de lo contrario se muestra un mensaje de error.
     if (isset($_SESSION['id_usuario'])) {
-        // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
+        // Se compara la acciones que el usuario puede realizar cuando ha iniciado sesión.
         switch ($_GET['action']) {
-            
+                //Se lee todos los datos que están almacenandos y lo que se agregarán posteriormente
             case 'readAll':
                 if ($result['dataset'] = $estadous->readAll()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Existen '.count($result['dataset']).' registros';
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
                 } elseif (Database::getException()) {
                     $result['exception'] = Database::getException();
                 } else {
                     $result['exception'] = 'No hay datos registrados';
                 }
                 break;
-
-            //     case 'readOne':
-            //         if (!$estadous->setId($_POST['id_talla'])) {
-            //             $result['exception'] = 'Categoría incorrecta';
-            //         } elseif ($result['dataset'] = $estadous->readOne()) {
-            //             $result['status'] = 1;
-            //         } elseif (Database::getException()) {
-            //             $result['exception'] = Database::getException();
-            //         } else {
-            //             $result['exception'] = 'Categoría inexistente';
-            //         }
-            //     break;
-
-            // case 'search':
-            //     $_POST = Validator::validateForm($_POST);
-            //     if ($_POST['search'] == '') {
-            //         $result['exception'] = 'Ingrese un valor para buscar';
-            //     } elseif ($result['dataset'] = $estadous->searchRows($_POST['search'])) {
-            //         $result['status'] = 1;
-            //         $result['message'] = 'Existen '.count($result['dataset']).' coincidencias';
-            //     } elseif (Database::getException()) {
-            //         $result['exception'] = Database::getException();
-            //     } else {
-            //         $result['exception'] = 'No hay coincidencias';
-            //     }
-            //     break;
-
-            // case 'create':
-            //     $_POST = Validator::validateForm($_POST);
-            //     if (!$estadous->setTalla($_POST['talla'])) {
-            //         $result['exception'] = 'Talla incorrecta';
-            //     } elseif ($estadous->createRow()) {
-            //         $result['status'] = 1;
-            //         $result['message'] = 'Talla creada correctamente';
-            //     } else {
-            //         $result['exception'] = Database::getException();
-            //     }
-            //     break;
-
-            // case 'update':
-            //     $_POST = Validator::validateForm($_POST);
-            //     if (!$estadous->setId($_POST['id'])) {
-            //         $result['exception'] = 'id de talla incorrecta';
-            //     } elseif (!$data = $estadous->readOne()) {
-            //         $result['exception'] = 'talla inexistente';
-            //     } elseif (!$estadous->setTalla($_POST['talla'])) {
-            //         $result['exception'] = 'talla incorrecto';
-            //     } elseif ($estadous->updateRow()) {
-            //         $result['status'] = 1;
-            //         $result['message'] = 'Talla modificada correctamente';
-            //     } else {
-            //         $result['exception'] = Database::getException();
-            //     }
-            // break;
-
-            // case 'delete':
-            //     if (!$estadous->setId($_POST['id_talla'])) {
-            //         $result['exception'] = 'Talla incorrecta';
-            //     } elseif (!$data = $estadous->readOne()) {
-            //         $result['exception'] = 'talla inexistente';
-            //     } elseif ($estadous->deleteRow()) {
-            //         $result['status'] = 1;
-            //         $result['message'] = 'Talla eliminada correctamente';
-            //     } else {
-            //         $result['exception'] = Database::getException();
-            //     }
-            //     break;
             default:
                 $result['exception'] = 'Acción no disponible dentro de la sesión';
         }
